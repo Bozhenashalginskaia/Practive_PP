@@ -38,9 +38,13 @@ session_start();
             <!-- Start form -->
             <form action="./autoriz.php" method="POST" class="mt-4 bg-forms rounded-border_forms px-32 pt-6 pb-8 mb-4"
                 >
-                <p class="text-white mt-5 flex flex-col justify-center ml-3">
-                    <?= $_SESSION['message'] ?>
-                </p>
+                <?php
+                          if (isset($_SESSION['message'])) {
+                              echo '<p class="text-center text-h1_color font-bold mt-7 rounded-input_forms
+                               px-3 py-2 border-white border"> ' . $_SESSION['message'] . ' </p>';
+                             }
+                              unset($_SESSION['message']);
+                            ?>
                 <label class="">
                     <input placeholder="Логин" type="text" name="login"
                         class="rounded-input_forms placeholder-white focus:placeholder-place_color placeholder-text-3xl mt-10 px-3 py-2 bg-input_forms border shadow-sm border-input_forms focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full sm:text-sm focus:ring-1" />

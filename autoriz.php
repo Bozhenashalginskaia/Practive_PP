@@ -3,7 +3,7 @@ session_start();
 
 include("db.php");
 
-$password = $_POST['password'];
+$password = md5($_POST['password']);
 $login = $_POST['login'];
 
 
@@ -23,19 +23,22 @@ foreach($sql_execute as $user){
         "login" => $user['login'],
         "role" => $user['role']
     ];
-    // $_SESSION['role'] = $user['role'];
-    // $_SESSION['id'] = $user['id'];
-    $_SESSION['message'] = 'okay';
-    header('Location: ./index.php');
-    // exit(0);
+    $pass = $user['password'];
+    if($pass == $password){ header('Location: ./index.php');}
+    else{ 
+        $_SESSION['message'] = "Неправильный логин или пароль";
+        exit(0);}
    
      }  } else {
     header('Location: ./autorization.php');
+    $_SESSION['message'] = "Неправильный логин или пароль";
+    exit(0);
 }
 }
 catch(PDOException $e){
     echo $e->getMessage();
 }
+
  
 // if($sql_execute) {
 //         header('Location: ./personal_account.php');

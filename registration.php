@@ -32,7 +32,8 @@ session_start();
             <!-- Start main regist_form -->
             <h1 class="text-4xl text-white text-center mt-12">Регистрация</h1>
             <div class="w-50 flex justify-center items-center  rounded-border_forms mt-8">
-                    <form action="registr.php" method="POST" enctype="multipart/form-data" class="mt-4 bg-forms rounded-border_forms px-32 pt-6 pb-8 mb-4" >
+                    <form action="registr.php" method="POST" id="validateForm" enctype="multipart/form-data" class="
+                    mt-4 bg-forms rounded-border_forms px-32 pt-6 pb-8 mb-4" >
                    
                           <?php
                           if (isset($_SESSION['message'])) {
@@ -42,23 +43,28 @@ session_start();
                               unset($_SESSION['message']);
                             ?>
                         
-                            <input placeholder="ФИО" type="name" name="name" class="text-white mt-7 rounded-input_forms placeholder-white focus:placeholder-place_color placeholder-text-3xl px-3 py-2 bg-input_forms border shadow-sm border-input_forms focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full  sm:text-sm focus:ring-1" />
+                            <input placeholder="ФИО" type="name" name="name" required class="
+                            text-white mt-7 rounded-input_forms placeholder-white focus:placeholder-place_color placeholder-text-3xl px-3 py-2 bg-input_forms border shadow-sm border-input_forms focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full  sm:text-sm focus:ring-1" />
                           
-                            <input placeholder="Логин" type="text" name="login" class="text-white mt-7 rounded-input_forms placeholder-white focus:placeholder-place_color text-3xl  px-3 py-2 bg-input_forms border shadow-sm border-input_forms focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full sm:text-sm focus:ring-1"/>
+                            <input placeholder="Логин"  type="text"  name="login" required class="
+                            text-white mt-7 rounded-input_forms placeholder-white focus:placeholder-place_color text-3xl  px-3 py-2 bg-input_forms border shadow-sm border-input_forms focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full sm:text-sm focus:ring-1"/>
                             
-                            <label for="upload-photo" class="text-white mt-7 rounded-input_forms
+                            <label for="upload-photo" class="
+                            text-white mt-7 rounded-input_forms
                              placeholder-white focus:placeholder-place_color placeholder-text-3xl 
                             px-3 py-2 bg-input_forms border shadow-sm border-input_forms 
                             focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full  
                             sm:text-sm focus:ring-1" >Загрузить фото</label>
-                            <input type="file" class="hidden" name="avatar" id="upload-photo"/>
+                            <input type="file" id="hidden" name="avatar" required id="upload-photo"/>
                             
                        
-                            <input placeholder="Пароль" type="password" name="password" class="text-white mt-7 rounded-input_forms placeholder-white focus:placeholder-place_color text-3xl px-3 py-2 bg-input_forms border shadow-sm border-input_forms focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full sm:text-sm focus:ring-1"/>
+                            <input placeholder="Пароль" type="password" name="password" required class="
+                            text-white mt-7 rounded-input_forms placeholder-white focus:placeholder-place_color text-3xl px-3 py-2 bg-input_forms border shadow-sm border-input_forms focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full sm:text-sm focus:ring-1"/>
                      
-                            <input placeholder="Пароль еще раз" type="password" name="repeatpassword" class="mt-7 rounded-input_forms placeholder-white focus:placeholder-place_color text-3xl px-3 py-2 bg-input_forms border shadow-sm border-input_forms focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full sm:text-sm focus:ring-1"/>
+                            <input placeholder="Пароль еще раз"  type="password" name="repeatpassword" required class="
+                            mt-7 rounded-input_forms placeholder-white focus:placeholder-place_color text-3xl px-3 py-2 bg-input_forms border shadow-sm border-input_forms focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full sm:text-sm focus:ring-1"/>
                     
-                          <div class="flex wrap items-center justify-center text-white gap-x-2 mt-6">
+                          <div id="role" class="flex wrap items-center justify-center text-white gap-x-2 mt-6" required>
                           <input type="radio" class="w-4 h-4 bg-grad_two border-grad_two focus:ring-grad_two"  name="role" value="0">Студент
                           <input type="radio" class="w-4 h-4 bg-grad_two border-grad_two focus:ring-grad_two"  name="role" value="1">Репетитор
                         </div>
@@ -66,7 +72,7 @@ session_start();
                           
                           <div class="flex justify-center text-center mt-10">
                             <!-- Button -->
-                          <input type="submit" name="submit" class="text-center  text-white px-6 
+                          <input type="submit"  name="submit" class="text-center  text-white px-6 
                           py-3 bg-btn_color  rounded-border w-27 text-xl" placeholder="Зарегистрироваться">
                             <!-- Button -->
                         </div>
@@ -97,6 +103,6 @@ session_start();
               
               <div class="flex items-center justify-center">Сервис создан с помощью...</div>
               </footer> -->
-
+<script src="./js/validation.js"></script>
             </body>
             </html>
