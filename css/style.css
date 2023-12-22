@@ -1056,8 +1056,20 @@ video {
   height: 250px;
 }
 
+.h-full {
+  height: 100%;
+}
+
 .h-px {
   height: 1px;
+}
+
+.max-h-80 {
+  max-height: 20rem;
+}
+
+.max-h-px {
+  max-height: 1px;
 }
 
 .min-h-\[1em\] {
@@ -1086,10 +1098,6 @@ video {
 
 .w-64 {
   width: 16rem;
-}
-
-.w-65px {
-  width: 65px;
 }
 
 .w-\[this-is\\\\\] {

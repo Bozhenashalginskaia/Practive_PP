@@ -75,7 +75,7 @@ session_start();
                                 <?php
                                 include("db.php");
 
-                                $sql=$pdo->prepare("SELECT * FROM users WHERE role='teacher'");
+                                $sql=$pdo->prepare("SELECT * FROM users inner join teacher_info on(users.id=teacher_info.id_teacher) WHERE role='teacher'");
                                 $sql->execute();
                                 $result=$sql->fetchAll(PDO::FETCH_ASSOC);
 
@@ -83,36 +83,21 @@ session_start();
                                     $username = $row['username'];
                                     $avatar = $row['avatar'];
                                     $id = $row['id'];
+                                    $subject= $row['subject'];
+
                                     //$_SESSION['id'] = $id;
 
                                     echo '<div class="mt-12 grid grid-rows-1 grid-flow-col justify-items-start ">
                                     <img width="65" height="65" class="rounded-full" src="'.$avatar.'" alt="">
                                     <div class="flex flex-col">
                                     <h2 class="text-lg">'.$username.'</h2>
-                                    <span class="text-sm text-center">'.$_SESSION['teacher']['subject'].'</span>
+                                    <span class="text-sm text-center">'.$subject.'</span>
                                 </div>
-                                <a href="./profile_teacher.php" class="text-p_color_forms underline">посмотреть профиль</a>
+                                <a href="./profile_teacher.php?Id='.$id.'" class="text-p_color_forms underline">посмотреть профиль</a>
                                 </div>
                                     ';
                                 }
                                 ?>
-
-                            <div class="mt-12 grid grid-rows-1 grid-flow-col justify-items-start">
-                                <img src="/img/picture.svg" alt="">
-                                <div class="flex flex-col">
-                                <h2 class="text-lg">Черемушкина Анастасия Васильевна </h2>
-                                <span class="text-sm text-center">информатика</span>
-                            </div>
-                            <a href="./profile_teacher.html" class="text-p_color_forms underline">посмотреть профиль</a>
-                            </div>
-                            <div class="mt-12 grid grid-rows-1 grid-flow-col justify-items-start">
-                                <img src="/img/picture.svg" alt="">
-                                <div class="flex flex-col">
-                                <h2 class="text-lg">Иван</h2>
-                                <span class="text-sm text-center">информатика</span>
-                            </div>
-                            <a href="./profile_teacher.html" class="text-p_color_forms underline">посмотреть профиль</a>
-                            </div>
                             
                     </div>
                     </div>

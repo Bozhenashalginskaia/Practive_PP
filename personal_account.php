@@ -1,6 +1,7 @@
 <?php
-  session_start();
-  if(  $_SESSION['role'] !== "student"){ header("Location: ./profile_teacher.php"); }
+ 
+  if(  $_SESSION['user']['role'] !== "student"){ 
+    header("Location: ./profile_teacher.php"); }
 
 ?>
 <!DOCTYPE html>
@@ -32,9 +33,9 @@
 
             <div class="flex flex-col space-y-44 text-white mt-14 text-2xl mb-14">
                 <div class="flex flex-col space-y-14 text-white mt-20 text-2xl">
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./main.html">Главная</a>
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./authorization.html">Личный кабинет</a>
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./search.html">Поиск</a>
+                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./main.php">Главная</a>
+                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./authorization.php">Личный кабинет</a>
+                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./search.php">Поиск</a>
  
             </div>
           
@@ -150,7 +151,7 @@
 
                 <!-- Message -->
                 
-                    <div class="bg-white rounded-border_ret row-start-1 col-span-2">
+                    <div class="bg-white rounded-border_ret row-start-1 col-span-2 h-full">
                     <div class="">
                         
                         <h1 class="text-2xl text-h1_color font-bold text-center mt-6">Мои занятия</h1>
@@ -178,7 +179,8 @@
 
                         <div class="grid grid-rows-1  ml-8 mt-16">
 
-                            <div class="overflow-auto h-2/4 scroll-smooth">
+                            <div class="overflow-auto h-full max-h-80 scroll-smooth" >
+                                <!-- max height 350px -->
                                 
                             <div class="w-104 h-35 rounded-border_f bg-F4F4FE text-center flex">
                                 <img class="mt-5 ml-3" src="./img/books.svg" alt="">
@@ -198,6 +200,86 @@
                                     </div>
                                 </div>
                             </div>
+                                    
+                            <div class="w-104 h-35 rounded-border_f bg-F4F4FE text-center flex">
+                                <img class="mt-5 ml-3" src="./img/books.svg" alt="">
+                                <div class="text-D1408C text-center">
+                                    <p class="text-D1408C text-2xl text-center mt-6">Программирование</p>
+                                    <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
+                                    <div class="flex text-sm justify-around mt-2">
+                                        <div class="mb-4">
+                                            <p>Пн</p>
+                                            <p>12:30</p>
+                                        </div>
+                                        
+                                        <div class="">
+                                            <p>Ср</p>
+                                            <p>12:30</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                    
+                            <div class="w-104 h-35 rounded-border_f bg-F4F4FE text-center flex">
+                                <img class="mt-5 ml-3" src="./img/books.svg" alt="">
+                                <div class="text-D1408C text-center">
+                                    <p class="text-D1408C text-2xl text-center mt-6">Программирование</p>
+                                    <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
+                                    <div class="flex text-sm justify-around mt-2">
+                                        <div class="mb-4">
+                                            <p>Пн</p>
+                                            <p>12:30</p>
+                                        </div>
+                                        
+                                        <div class="">
+                                            <p>Ср</p>
+                                            <p>12:30</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                    
+                            <div class="w-104 h-35 rounded-border_f bg-F4F4FE text-center flex">
+                                <img class="mt-5 ml-3" src="./img/books.svg" alt="">
+                                <div class="text-D1408C text-center">
+                                    <p class="text-D1408C text-2xl text-center mt-6">Программирование</p>
+                                    <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
+                                    <div class="flex text-sm justify-around mt-2">
+                                        <div class="mb-4">
+                                            <p>Пн</p>
+                                            <p>12:30</p>
+                                        </div>
+                                        
+                                        <div class="">
+                                            <p>Ср</p>
+                                            <p>12:30</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                    
+                            <div class="w-104 h-35 rounded-border_f bg-F4F4FE text-center flex">
+                                <img class="mt-5 ml-3" src="./img/books.svg" alt="">
+                                <div class="text-D1408C text-center">
+                                    <p class="text-D1408C text-2xl text-center mt-6">Программирование</p>
+                                    <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
+                                    <div class="flex text-sm justify-around mt-2">
+                                        <div class="mb-4">
+                                            <p>Пн</p>
+                                            <p>12:30</p>
+                                        </div>
+                                        
+                                        <div class="">
+                                            <p>Ср</p>
+                                            <p>12:30</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <div class="mt-5 w-85 h-35 rounded-border_ret bg-F4F4FE text-center flex">
                                 <img class="mt-8 ml-8" src="./img/books.svg" alt="">

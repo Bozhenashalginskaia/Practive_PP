@@ -1,7 +1,7 @@
 <?php
 session_start();
-echo $_SESSION['id'];
-if (!empty($_SESSION['id'])) {
+// echo $_SESSION['user']['id'];
+if (!empty($_SESSION['user']['id'])) {
     include ('./personal_account.php');
 } else {
 

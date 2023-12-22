@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+$id_t= $_GET['Id'];
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +62,7 @@ session_start();
                     <div class="flex ml-6 mt-6">
                     <?php
                     include('db.php');
-                    $query = "SELECT * FROM teacher_info";
+                    $query = "SELECT * FROM teacher_info where id_teacher='$id_t'";
                     $stmt = $pdo->prepare($query);
                     $stmt->execute();
 
@@ -70,16 +70,16 @@ session_start();
 
                     if($result){
                         foreach($result as $row){
-                            $_SESSION['teacher'] = [
-                            "id" => $row['id'],
-                            "experience" =>$row['experience'],
-                            "age" => $row['age'],
-                            "choice" => $row['choice'],
-                            "about" => $row['about'],
-                            "practice" => $row['practice'],
-                            "skills" => $row['skills'],
-                            "subject" => $row['subject'],
-                            ];
+                            // $_SESSION['teacher'] = [
+                            // "id" => $row['id'],
+                            // "experience" =>$row['experience'],
+                            // "age" => $row['age'],
+                            // "choice" => $row['choice'],
+                            // "about" => $row['about'],
+                            // "practice" => $row['practice'],
+                            // "skills" => $row['skills'],
+                            // "subject" => $row['subject'],
+                            // ];
                             
 ?>
                         <img class="rounded-full" src="<?=$_SESSION['user']['avatar']?>" width="145" height="145" alt="">

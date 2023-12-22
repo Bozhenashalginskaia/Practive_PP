@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['user']['name'];
+$id_from = $_SESSION['user']['id'];
 ?>
 
 <!DOCTYPE html>
@@ -59,51 +59,45 @@ $_SESSION['user']['name'];
                         </div>
                     </div>
 
-                    <!-- DATE -->
-                    <!-- <input class="flex center rounded-border_ret placeholder-white focus:placeholder-place_color placeholder-text-3xl mt-16 px-2 py-5 bg-input_forms border shadow-sm border-input_forms focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full rounded-md sm:text-sm focus:ring-1" type="text" id="el">
-                       -->
-                       <!-- DATE -->
-                       <!-- Message -->
+                 
                         <div class="grid grid-rows-3 px-3 mt-12 gap-y-5">
-                            <div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
-                                <div class="flex justify-around mt-2">
-                                <p class="ml-3 text-sm text-BEACD2">Карачаева Т.В.</p>
-                                <p class="text-sm text-BEACD2">12:06</p>
-                            </div>
-                            <p class="text-12px text-white mt-2 mb-4">Перенос занятия на другое вр...</p>
-                        </div>
+                            <?php
+
+                            include("db.php");
+
+                           // $sql=$pdo->prepare("SELECT DISTINCT to_user FROM messages inner join users on(users.id = messages.to_user) WHERE from_id='$id_from'");
+                            $query=$pdo->prepare("SELECT DISTINCT to_user FROM messages WHERE from_id='$id_from'");
+                            $query->execute();
+                            
+                            $data=$query->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach($data as $user){
+                                $to_id = $user['to_user'];
+                            
+
+                            $sql= $pdo->prepare("SELECT * FROM users WHERE id='$to_id'");
+                            $sql->execute();
+
+                            $result=$sql->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach($result as $row){
+                                $username = $row['username'];
+                                // $avatar = $row['avatar'];
+                                $id = $row['id'];
+                            
+
+                                //$_SESSION['id'] = $id
                            
-                            <div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
-                                <div class="flex justify-around mt-2">
-                                <p class="ml-3 text-sm text-BEACD2">Карачаева Т.В.</p>
-                                <p class="text-sm text-BEACD2">12:06</p>
-                            </div>
-                            <p class="text-12px text-white mt-2 mb-4">Перенос занятия на другое вр...</p>
-                        </div>
-
-                        <div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
+                            echo '<div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
                             <div class="flex justify-around mt-2">
-                            <p class="ml-3 text-sm text-BEACD2">Карачаева Т.В.</p>
-                            <p class="text-sm text-BEACD2">12:06</p>
+                            <p class="ml-3 text-sm text-BEACD2">'.$username.'</p>
+                            <img class="ml-3 " src=<?php  echo $avatar ?>
                         </div>
-                        <p class="text-12px text-white mt-2 mb-4">Перенос занятия на другое вр...</p>
-                    </div>
-
-                    <div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
-                        <div class="flex justify-around mt-2">
-                        <p class="ml-3 text-sm text-BEACD2">Карачаева Т.В.</p>
-                        <p class="text-sm text-BEACD2">12:06</p>
-                    </div>
-                    <p class="text-12px text-white mt-2 mb-4">Перенос занятия на другое вр...</p>
-                </div>
-
-                <div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
-                    <div class="flex justify-around mt-2">
-                    <p class="ml-3 text-sm text-BEACD2">Карачаева Т.В.</p>
-                    <p class="text-sm text-BEACD2">12:06</p>
-                </div>
-                <p class="text-12px text-white mt-2 mb-4">Перенос занятия на другое вр...</p>
-            </div>
+                    </div>';
+                                }}
+                        
+                            ?>
+                <!--  -->
 
             <div class="flex items-center justify-center mt-7 mb-3">
                 <a href="./personal_account.php"><img class="active:mr-3 hover:mr-2" src="./img/arrow_back.svg" alt=""></a>
@@ -122,38 +116,14 @@ $_SESSION['user']['name'];
                     
                         <div class="overflow-auto mt-4 flex justify-center items-center ml-8 py-2 rounded-border_ret bg-EAE0F5 text-white text-center">
                             <div class="flex justify-center mt-2">
-                            <p class="ml-3 text-xl text-message text-center">Карачаева Т.В.</p>
+                            <p class="ml-3 text-xl text-message text-center"><?=$row['username']?></p>
                         </div>
                     </div>
                         </div>
                         <div class="mt-16 ml-6 messages-wrap overflow-auto h-2/4">
-                        <!-- <div class="">
-                            <div class="w-3/4 mt-16 ml-6 py-13 rounded-border_ret bg-F4F4FE text-left flex">
-                                <h1 class="px-8 py-4 text-left text-message text-sm">"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                                     totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et qua</h1>
-                            </div>
-
-                            <div class="float-right w-3/4 mt-5 rounded-border_ret bg-F4F4FE text-right flex -mr-14">
-                                <h1 class="px-8 py-4 text-right text-message text-sm">"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,</h1>
-                            </div>
-
-
-                            <div class="float-left w-3/4 mt-5 ml-6 py-13 rounded-border_ret bg-F4F4FE text-left flex">
-                                <h1 class="px-8 py-4 text-left text-message text-sm">"Sed ut perspiciatis unde </h1>
-                            </div>
-                            
-                            <div class="float-left w-3/4 mt-5 ml-6 py-13 rounded-border_ret bg-F4F4FE text-left flex">
-                                <h1 class="px-8 py-4 text-left text-F4F4FE text-sm">"Sed ut perspiciatis unde </h1>
-                            </div>
-
-                            <div class="float-right w-3/4 mt-5 rounded-border_ret bg-F4F4FE text-right flex -mr-14">
-                                <h1 class="px-8 py-4 text-right text-message text-sm">"Sed ut perspiciatis unde omnis</h1>
-                            </div>
-                            </div> -->
+                       
                         </div>
-                            <!-- <div class="float-none w-3/4 mt-5 rounded-border_ret bg-F4F4FE text-right flex -mr-14">
-                                <h1 class="px-8 py-4 text-right text-message text-sm">"Sed ut perspiciatis unde omnis</h1>
-                            </div> -->
+                            
                             <div class="">
                                 <form id="chat-click" action="">
                                 <div class=" ml-8 mb-3 mt-10 ">
@@ -202,6 +172,7 @@ $_SESSION['user']['name'];
 ?>
  <script>
 
+
      let start = 0;
 
     $(document).ready(function() {
@@ -223,7 +194,7 @@ $_SESSION['user']['name'];
             data.forEach(item => {
 
                 $(".messages-wrap").append( renderMessage(item));
-                start = item.id;
+                start = item.id_message;
                 console.log(start);
             })
 

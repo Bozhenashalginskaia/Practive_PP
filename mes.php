@@ -1,13 +1,13 @@
 <?php
 date_default_timezone_set('Europe/Moscow');
-$user = $_SESSION['id'];
+//$user = $_SESSION['id'];
 
 include("db.php");
 
     if(!isset($_GET['action'])){
 
         $start = ($_GET['start']) ? $_GET['start'] :  0;
-    $sql = ("SELECT * FROM messages WHERE id > $start LIMIT 100");
+    $sql = ("SELECT * FROM messages INNER JOIN users on (messages.from_id=users.username) WHERE id > $start LIMIT 100");
 
 
     try {
@@ -30,7 +30,7 @@ elseif($_GET['action'] == 'add_message') {
     $username = ($_POST['username']) ? $_POST['username'] :'Имя не указано';
     $datetime = time();
 
-    $sql = "INSERT INTO messages (message, username, datetime) VALUES ('$message', '$username', '$datetime')";
+    $sql = "INSERT INTO messages (message, from_id, datetime) VALUES ('$message', '$from_id', '$datetime')";
 
     try {
         $result = $pdo->exec($sql);
