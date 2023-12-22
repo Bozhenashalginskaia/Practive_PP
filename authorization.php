@@ -24,8 +24,8 @@ session_start();
         <header class="">
             <div class="flex justify-center">
                 <div class="space-x-20 text-white mt-20 text-2xl">
-                    <a class="hover:underline underline-offset-8 decoration-1.5" href="./main.html">Главная</a>
-                    <a class="hover:underline underline-offset-8 decoration-1.5" href="./authorization.php">Личный
+                    <a class="hover:underline underline-offset-8 decoration-1.5" href="./index.php">Главная</a>
+                    <a class="hover:underline underline-offset-8 decoration-1.5" href="autorization.php">Личный
                         кабинет</a>
                     <a class="hover:underline underline-offset-8 decoration-1.5" href="./search.html">Поиск</a>
                 </div>
@@ -37,7 +37,7 @@ session_start();
         <div class="w-122 flex justify-center items-center  rounded-border_forms mt-8">
             <!-- Start form -->
             <form action="./autoriz.php" method="POST" class="mt-4 bg-forms rounded-border_forms px-32 pt-6 pb-8 mb-4"
-                action="">
+                >
                 <p class="text-white mt-5 flex flex-col justify-center ml-3">
                     <?= $_SESSION['message'] ?>
                 </p>

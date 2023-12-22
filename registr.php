@@ -18,7 +18,7 @@ if ($password !== $repeatpassword) {
     header('Location: ./registration.php');
     } else {
 
-        $password = md5($password);
+        //$password = md5($password);
         //$password = password_hash($password,  PASSWORD_DEFAULT);
 
 

@@ -1,3 +1,13 @@
+<?php
+session_start();
+echo $_SESSION['id'];
+if (!empty($_SESSION['id'])) {
+    include ('./personal_account.php');
+} else {
+
+
+echo <<<HTML
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,10 +36,10 @@
         <header class="container mx-auto font-Inter">
             <div class="flex justify-center">
                 <div class="space-x-20 text-white mt-20 text-2xl">
-                    <a class="hover:underline underline-offset-8 decoration-1.5" href="./main.html">Главная</a>
-                    <a class="hover:underline underline-offset-8 decoration-1.5" href="./authorization.html">Личный
+                    <a class="hover:underline underline-offset-8 decoration-1.5" href="main.php">Главная</a>
+                    <a class="hover:underline underline-offset-8 decoration-1.5" href="authorization.php">Личный
                         кабинет</a>
-                    <a class="hover:underline underline-offset-8 decoration-1.5" href="./search.html">Поиск</a>
+                    <a class="hover:underline underline-offset-8 decoration-1.5" href="search.php">Поиск</a>
                 </div>
             </div>
         </header>
@@ -78,3 +88,6 @@
 </body>
 
 </html>
+
+HTML;}
+?>
