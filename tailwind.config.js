@@ -7,7 +7,9 @@ module.exports = {
       fontFamily: {
         Inter: ['Inter'],
         Biz: ['BIZ UDGothic']
-        
+      },
+      maxHeight: {
+        '450': '450px',
       },
       colors: {
         grad_one: '#8347BB',
@@ -35,6 +37,7 @@ module.exports = {
         active_mes: "#DFD0F0",
         message: "#745998",
         error: "#C42D2D",
+        focus: "#3B1564"
       },
       fontSize: {
         '12px':'12px',

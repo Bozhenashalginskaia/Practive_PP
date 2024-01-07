@@ -1,4 +1,5 @@
 document.getElementById("validateForm").addEventListener("submit", function (event) {
+    event.preventDefault();
     var name = document.getElementsByName("name")[0].value;
     var login = document.getElementsByName("login")[0].value;
     var avatar = document.getElementsByName(".avatar")[0].value;
@@ -7,21 +8,21 @@ document.getElementById("validateForm").addEventListener("submit", function (eve
     
     
     var nameRegex = /^[А-Яа-яЁё\s]+$/;
-    if (login.length < 6) {
+    if (!login.test() || login.length < 6 ) {
     alert("Логин должен содержать минимум 6 символа.");
-    event.preventDefault();
+    
     }
     if (password.length < 8) {
     alert("Пароль должен содержать минимум 8 символов.");
-    event.preventDefault();
+    
     }
     if (!nameRegex.test(name)) {
     alert("Неправильный формат ФИО.");
-    event.preventDefault();
+    
     }
     if (password !== repeatrass) {
     alert("Пароли не совпадают");
-    event.preventDefault();
+   
     }
 
    });

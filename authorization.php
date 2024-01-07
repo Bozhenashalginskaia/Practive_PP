@@ -27,7 +27,7 @@ session_start();
                     <a class="hover:underline underline-offset-8 decoration-1.5" href="./index.php">Главная</a>
                     <a class="hover:underline underline-offset-8 decoration-1.5" href="autorization.php">Личный
                         кабинет</a>
-                    <a class="hover:underline underline-offset-8 decoration-1.5" href="./search.html">Поиск</a>
+                    <a class="hover:underline underline-offset-8 decoration-1.5" href="./search.php">Поиск</a>
                 </div>
             </div>
         </header>
@@ -36,7 +36,7 @@ session_start();
         <h1 class="text-4xl text-white text-center mt-12">Вход</h1>
         <div class="w-122 flex justify-center items-center  rounded-border_forms mt-8">
             <!-- Start form -->
-            <form action="./autoriz.php" method="POST" class="mt-4 bg-forms rounded-border_forms px-32 pt-6 pb-8 mb-4"
+            <form action="./login.php" method="POST" class="mt-4 bg-forms rounded-border_forms px-32 pt-6 pb-8 mb-4"
                 >
                 <?php
                           if (isset($_SESSION['message'])) {

@@ -1,13 +1,19 @@
 <?php
 date_default_timezone_set('Europe/Moscow');
-//$user = $_SESSION['id'];
+$user = $_SESSION['id'];
 
 include("db.php");
 
     if(!isset($_GET['action'])){
 
         $start = ($_GET['start']) ? $_GET['start'] :  0;
-    $sql = ("SELECT * FROM messages INNER JOIN users on (messages.from_id=users.username) WHERE id > $start LIMIT 100");
+    $sql = ("SELECT * FROM messages INNER JOIN users on (messages.to_user=users.id) WHERE id_message > '$start' and ( to_user='$to_user' and from_id='$from_id') 
+    or ( from_id='$to_user' and to_user='$from_id')");
+
+    // $sql = "SELECT * from message inner join users on (users.Id=message.id_Fr)where 
+    // Id_sms>'$start' and( (id_Fr='$Idfr' and  Id_Us='$id_us') or (Id_Us='$Idfr'and id_Fr='$id_us')) ";
+
+    
 
 
     try {

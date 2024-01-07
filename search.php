@@ -31,12 +31,12 @@ session_start();
 
             <div class="flex flex-col space-y-44 text-white mt-14 text-2xl mb-14">
                 <div class="flex flex-col space-y-14 text-white mt-20 text-2xl">
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./main.html">Главная</a>
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./authorization.html">Личный кабинет</a>
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./search.html">Поиск</a>
+                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Главная</a>
+                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Личный кабинет</a>
+                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./search.php">Поиск</a>
  
                 </div>
-                    <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="">Выход</a>
+                    <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./exit.php">Выход</a>
                 </div>
                 
                 </div>
@@ -75,12 +75,12 @@ session_start();
                                 <?php
                                 include("db.php");
 
-                                $sql=$pdo->prepare("SELECT * FROM users inner join teacher_info on(users.id=teacher_info.id_teacher) WHERE role='teacher'");
+                                $sql=$pdo->prepare("SELECT * FROM users inner join teacher_info on(users.id=teacher_info.id_teacher) WHERE role='teacher' LIMIT 100");
                                 $sql->execute();
                                 $result=$sql->fetchAll(PDO::FETCH_ASSOC);
 
                                 foreach($result as $row){
-                                    $username = $row['username'];
+                                    $teacher_name = $row['username'];
                                     $avatar = $row['avatar'];
                                     $id = $row['id'];
                                     $subject= $row['subject'];
@@ -90,7 +90,7 @@ session_start();
                                     echo '<div class="mt-12 grid grid-rows-1 grid-flow-col justify-items-start ">
                                     <img width="65" height="65" class="rounded-full" src="'.$avatar.'" alt="">
                                     <div class="flex flex-col">
-                                    <h2 class="text-lg">'.$username.'</h2>
+                                    <h2 class="text-lg">'.$teacher_name.'</h2>
                                     <span class="text-sm text-center">'.$subject.'</span>
                                 </div>
                                 <a href="./profile_teacher.php?Id='.$id.'" class="text-p_color_forms underline">посмотреть профиль</a>

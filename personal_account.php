@@ -1,5 +1,6 @@
 <?php
- 
+
+ $id_from = $_SESSION['user']['id'];
   if(  $_SESSION['user']['role'] !== "student"){ 
     header("Location: ./profile_teacher.php"); }
 
@@ -33,8 +34,8 @@
 
             <div class="flex flex-col space-y-44 text-white mt-14 text-2xl mb-14">
                 <div class="flex flex-col space-y-14 text-white mt-20 text-2xl">
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./main.php">Главная</a>
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./authorization.php">Личный кабинет</a>
+                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Главная</a>
+                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Личный кабинет</a>
                 <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./search.php">Поиск</a>
  
             </div>
@@ -72,31 +73,49 @@
                     <div class="">
                         <h1 class="text-xl text-h1_color font-bold text-center mt-20 ">Сообщения</h1>
                     </div>
-                        <div class="grid grid-rows-1 px-3 mt-12 gap-y-5">
-                            <a href="./message.php" class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
-                                <div class="flex justify-around mt-2">
-                                <p class="ml-3 text-sm text-BEACD2">Карачаева Т.В.</p>
-                                <p class="text-sm text-BEACD2">12:06</p>
-                            </div>
-                            <p class="text-12px text-white mt-2 mb-4">Перенос занятия на другое вр...</p>
-                        </a>
-                           
-                            <a href="./message.php" class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
-                                <div class="flex justify-around mt-2">
-                                <p class="ml-3 text-sm text-BEACD2">Карачаева Т.В.</p>
-                                <p class="text-sm text-BEACD2">12:06</p>
-                            </div>
-                            <p class="text-12px text-white mt-2 mb-4">Перенос занятия на другое вр...</p>
-                        </a>
+                       
+                            <!-- url вывод друзей, передача id-->
+                            <!-- register.php?msg=exists -->
+                            <a href=""></a>
 
-                            <a href="./message.php" class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
-                                <div class="flex justify-around mt-2">
-                                <p class="ml-3 text-sm text-BEACD2">Карачаева Т.В.</p>
-                                <p class="text-sm text-BEACD2">12:06</p>
-                            </div>
-                            <p class="text-12px text-white mt-2 mb-4">Перенос занятия на другое вр...</p>
-                        </a>
-                    </div>
+                            <?php
+
+                            include("db.php");
+
+                            $query=$pdo->prepare("SELECT DISTINCT to_user FROM messages WHERE from_id='$id_from'");
+                            $query->execute();
+                            
+                            $data=$query->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach($data as $user){
+                                $to_id = $user['to_user'];
+                            
+
+                            $sql= $pdo->prepare("SELECT * FROM users WHERE id='$to_id'");
+                            $sql->execute();
+
+                            $result=$sql->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach($result as $row){
+                                $username = $row['username'];
+                                // $avatar = $row['avatar'];
+                                $id_to = $row['id'];
+
+                            echo ' <div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
+                            <a href="./message.php?id='.$id_to.' class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
+                            <div class="flex justify-around mt-2">
+                            <p class="ml-3 text-sm text-BEACD2">'.$username.'</p>
+                        </div>
+                        <img class="ml-3 " src=<?=$avatar?>
+                    </a>
+                    </div>';
+                                }}
+                        
+                            ?>
+
+
+                        
+                    
 
                     <div class="flex justify-around mt-7">
                         <nav aria-label="Page navigation example">
@@ -157,16 +176,16 @@
                         <h1 class="text-2xl text-h1_color font-bold text-center mt-6">Мои занятия</h1>
                         <div class="">
                         <div class="mb-3 ml-11 mt-10 flex justify-center">
-                            <div class="relative mb-4 flex w-full flex-wrap">
+                            <!-- <div class="relative mb-4 flex w-full flex-wrap">
                               <input
                                 type="search"
                                 class="relative m-0 -mr-0.5 block min-w-0 flex-auto rounded-border_ret border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none "
                                 placeholder="Search"
                                 aria-label="Search"
                                 aria-describedby="button-addon1" />
-                          
+                           -->
                               <!--Search button-->
-                              <button
+                              <!-- <button
                                 class="relative z-[2] ml-5 flex items-center rounded-border_ret bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
                                 type="button"
                                 id="button-addon1"
@@ -177,89 +196,12 @@
                             </div>
                           </div>
 
-                        <div class="grid grid-rows-1  ml-8 mt-16">
+                        <div class="grid grid-rows-1  ml-8 mt-16"> -->
 
-                            <div class="overflow-auto h-full max-h-80 scroll-smooth" >
+                            <div class="overflow-auto h-full max-h-450 scroll-smooth focus:scroll-auto" >
                                 <!-- max height 350px -->
                                 
-                            <div class="w-104 h-35 rounded-border_f bg-F4F4FE text-center flex">
-                                <img class="mt-5 ml-3" src="./img/books.svg" alt="">
-                                <div class="text-D1408C text-center">
-                                    <p class="text-D1408C text-2xl text-center mt-6">Программирование</p>
-                                    <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
-                                    <div class="flex text-sm justify-around mt-2">
-                                        <div class="mb-4">
-                                            <p>Пн</p>
-                                            <p>12:30</p>
-                                        </div>
-                                        
-                                        <div class="">
-                                            <p>Ср</p>
-                                            <p>12:30</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                                    
-                            <div class="w-104 h-35 rounded-border_f bg-F4F4FE text-center flex">
-                                <img class="mt-5 ml-3" src="./img/books.svg" alt="">
-                                <div class="text-D1408C text-center">
-                                    <p class="text-D1408C text-2xl text-center mt-6">Программирование</p>
-                                    <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
-                                    <div class="flex text-sm justify-around mt-2">
-                                        <div class="mb-4">
-                                            <p>Пн</p>
-                                            <p>12:30</p>
-                                        </div>
-                                        
-                                        <div class="">
-                                            <p>Ср</p>
-                                            <p>12:30</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                                    
-                            <div class="w-104 h-35 rounded-border_f bg-F4F4FE text-center flex">
-                                <img class="mt-5 ml-3" src="./img/books.svg" alt="">
-                                <div class="text-D1408C text-center">
-                                    <p class="text-D1408C text-2xl text-center mt-6">Программирование</p>
-                                    <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
-                                    <div class="flex text-sm justify-around mt-2">
-                                        <div class="mb-4">
-                                            <p>Пн</p>
-                                            <p>12:30</p>
-                                        </div>
-                                        
-                                        <div class="">
-                                            <p>Ср</p>
-                                            <p>12:30</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                                    
-                            <div class="w-104 h-35 rounded-border_f bg-F4F4FE text-center flex">
-                                <img class="mt-5 ml-3" src="./img/books.svg" alt="">
-                                <div class="text-D1408C text-center">
-                                    <p class="text-D1408C text-2xl text-center mt-6">Программирование</p>
-                                    <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
-                                    <div class="flex text-sm justify-around mt-2">
-                                        <div class="mb-4">
-                                            <p>Пн</p>
-                                            <p>12:30</p>
-                                        </div>
-                                        
-                                        <div class="">
-                                            <p>Ср</p>
-                                            <p>12:30</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            
                                     
                             <div class="w-104 h-35 rounded-border_f bg-F4F4FE text-center flex">
                                 <img class="mt-5 ml-3" src="./img/books.svg" alt="">

@@ -33,12 +33,12 @@ $id_from = $_SESSION['user']['id'];
 
             <div class="flex flex-col space-y-44 text-white mt-14 text-2xl mb-14">
                 <div class="flex flex-col space-y-14 text-white mt-20 text-2xl">
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./main.html">Главная</a>
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./authorization.html">Личный кабинет</a>
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./search.html">Поиск</a>
+                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Главная</a>
+                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Личный кабинет</a>
+                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./search.php">Поиск</a>
 
             </div>
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="">Выход</a>
+                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./exit.php">Выход</a>
             </div>
 
             </div>
@@ -91,7 +91,7 @@ $id_from = $_SESSION['user']['id'];
                             echo '<div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
                             <div class="flex justify-around mt-2">
                             <p class="ml-3 text-sm text-BEACD2">'.$username.'</p>
-                            <img class="ml-3 " src=<?php  echo $avatar ?>
+                            <img class="ml-3 " src=<?=$avatar ?>
                         </div>
                     </div>';
                                 }}
@@ -100,7 +100,7 @@ $id_from = $_SESSION['user']['id'];
                 <!--  -->
 
             <div class="flex items-center justify-center mt-7 mb-3">
-                <a href="./personal_account.php"><img class="active:mr-3 hover:mr-2" src="./img/arrow_back.svg" alt=""></a>
+                <a href="./index.php"><img class="active:mr-3 hover:mr-2" src="./img/arrow_back.svg" alt=""></a>
             </div>
 
                         
@@ -113,7 +113,6 @@ $id_from = $_SESSION['user']['id'];
                 
                     <div class=" bg-white rounded-border_ret row-start-1 col-span-4">
                         <div class="">
-                    
                         <div class="overflow-auto mt-4 flex justify-center items-center ml-8 py-2 rounded-border_ret bg-EAE0F5 text-white text-center">
                             <div class="flex justify-center mt-2">
                             <p class="ml-3 text-xl text-message text-center"><?=$row['username']?></p>
@@ -172,7 +171,7 @@ $id_from = $_SESSION['user']['id'];
 ?>
  <script>
 
-
+// передачаем id друга 
      let start = 0;
 
     $(document).ready(function() {
@@ -192,7 +191,6 @@ $id_from = $_SESSION['user']['id'];
         .done(function( data ) {
             //console.log(data);
             data.forEach(item => {
-
                 $(".messages-wrap").append( renderMessage(item));
                 start = item.id_message;
                 console.log(start);
@@ -206,24 +204,30 @@ $id_from = $_SESSION['user']['id'];
 });
 
     function renderMessage(item) {
+        let params=(new URL(document.location)).searchParams;
+        let Idfr=params.get('to_user')
+
         let time = new Date(item.datetime*1000);
         let minutes = (time.getMinutes()< 10) ? '0' +time.getMinutes() : time.getMinutes();
         let seconds = (time.getSeconds()< 10) ? '0' +time.getSeconds() : time.getSeconds();
         time = `${time.getHours()}:${minutes}:${seconds}`;
 
-        if(item.username == username) {
-            return `<div class="float-right w-3/4 mt-5 rounded-border_ret bg-F4F4FE text-right flex -mr-14">
-                 <h1 class="px-8 py-4 text-right text-message text-sm">
-                                ${item.message}</h1>
-                            </div>
-            `;
-        } else {
-            return `
+        if(item.to_user == $to_user) {
+            return 
+            `
             <h1 class="px-8 mt-4 text-left text-gray-500 text-xs">${time}</h1>
         <div class="w-3/4 mt-1 ml-6 py-13 rounded-border_ret bg-F4F4FE text-left flex">
         <h1 class="px-8 py-4 text-left text-message text-sm">${item.message}</h1>
                             </div>
                 `;
+            
+            
+        } else {
+            return 
+            `<div class="float-right w-3/4 mt-5 rounded-border_ret bg-F4F4FE text-right flex -mr-14">
+                 <h1 class="px-8 py-4 text-right text-message text-sm">
+                                ${item.message}</h1>
+                            </div>`
         }
         
     }
@@ -232,7 +236,8 @@ $id_from = $_SESSION['user']['id'];
 
         $.post("mes.php?action=add_message", {
             message: $('#message_text').val(),
-            username: username
+            // username: 
+            //дописать
         }).done(function(data) {$('#message_text').val('')});
 
         return false;
