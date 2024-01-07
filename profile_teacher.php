@@ -1,6 +1,6 @@
 <?php
 session_start();
-$id_t= $_GET['Id'];
+$id_t=$_SESSION['user']['id'];
 ?>
 
 <!DOCTYPE html>
@@ -70,16 +70,16 @@ $id_t= $_GET['Id'];
 
                     if($result){
                         foreach($result as $row){
-                            // $_SESSION['teacher'] = [
-                            // "id" => $row['id'],
-                            // "experience" =>$row['experience'],
-                            // "age" => $row['age'],
-                            // "choice" => $row['choice'],
-                            // "about" => $row['about'],
-                            // "practice" => $row['practice'],
-                            // "skills" => $row['skills'],
-                            // "subject" => $row['subject'],
-                            // ];
+                            $_SESSION['teacher'] = [
+                            "id" => $row['id'],
+                            "experience" =>$row['experience'],
+                            "age" => $row['age'],
+                            "choice" => $row['choice'],
+                            "about" => $row['about'],
+                            "practice" => $row['practice'],
+                            "skills" => $row['skills'],
+                            "subject" => $row['subject'],
+                            ];
                             
 ?>
                         <img class="rounded-full" src="<?=$_SESSION['user']['avatar']?>" width="145" height="145" alt="">
@@ -144,7 +144,7 @@ $id_t= $_GET['Id'];
                 
                     <div class="bg-white rounded-border_ret row-start-1 col-span-1 ml-14">
                     
-                    <form action="">
+                    <!-- <form action="">
 
                     <div class="">
                         <h1 class="text-2xl text-h1_color font-bold text-center mt-16">О себе</h1>
@@ -161,7 +161,7 @@ $id_t= $_GET['Id'];
                                                 <p class="text-h1_color mt-6 text-base text-center"><?=$_SESSION['teacher']['skills']?></p>
                                                         </div>
 
-                    </form>
+                    </form> -->
                                                         <div class="flex justify-center text-center mt-10">
                                                         <a class="text-center text-p_color_forms underline" href="./search.html">Вернуться к поиску</a>
                                                         </div>

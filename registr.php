@@ -10,7 +10,6 @@ $role = $_POST["role"];
 
 $_SESSION["name"] = $name;
 
-
 $_SESSION["role"] = $role;
 
 // if(!preg_match("/^[a-zA-Z0-9]+$/",$login))
@@ -41,11 +40,14 @@ if ($password !== $repeatpassword) {
 
     if ($role == 1) {
         $role = 'teacher';
+       
     } else {
         $role = 'student';
     }
 
 try {
+
+    
 
     $statement = $pdo->prepare("SELECT * FROM users WHERE login=:login LIMIT 1");
     $statement->bindParam(':login', $login, PDO::PARAM_STR);
@@ -57,6 +59,8 @@ try {
         header('Location: ./registration.php');
     } else {
 
+        $pdo->beginTransaction();
+
     $sql = "INSERT INTO users (id, username, password, login, role, avatar) VALUES (NULL, ?, ?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(1, $name);
@@ -66,7 +70,17 @@ try {
     $stmt->bindParam(5, $path);
     $sql_execute = $stmt->execute();
 
-if($sql_execute){
+    $insertId = $pdo->lastInsertId();
+
+    $teacher ="INSERT INTO teacher_info (id_teacher) VALUES (:id)";
+    $st = $pdo->prepare($teacher);
+    $st->bindParam(":id", $insertId, PDO::PARAM_INT);
+    $execute = $st->execute();
+    
+    $pdo->commit();
+
+
+    if($sql_execute){
     $_SESSION['message'] = "Вы успешно зарегистрировались";
     header ("Location: ./authorization.php");
     exit(0);

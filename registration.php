@@ -103,6 +103,6 @@ session_start();
               
               <div class="flex items-center justify-center">Сервис создан с помощью...</div>
               </footer> -->
-<script src="./js/validation.js"></script>
+<!-- <script src="./js/validation.js"></script> -->
             </body>
             </html>
