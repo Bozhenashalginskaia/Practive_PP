@@ -66,7 +66,12 @@ try {
     $st = $pdo->prepare($teacher);
     $st->bindParam(":id", $insertId, PDO::PARAM_INT);
     $execute = $st->execute();
+  
     
+    $courses = "INSERT INTO courses (id_teach) VALUES (:id)";
+    $stm =$pdo->prepare($courses);
+    $stm->bindParam(":id", $insertId, PDO::PARAM_INT);
+    $exec = $stm->execute();
     $pdo->commit();
 
 
