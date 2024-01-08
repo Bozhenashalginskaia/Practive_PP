@@ -61,9 +61,11 @@ $id_t=$_SESSION['user']['id'];
                     col-span-3">
                     <div class="flex flex-col">
                     <div class="flex ml-6 mt-6">
+                        <!-- Данные репетитора -->
                     <?php
                     include('db.php');
                     $query = "SELECT * FROM users inner join teacher_info on(users.id=teacher_info.id_teacher) where id_teacher='$id'";
+                    
                     $stmt = $pdo->prepare($query);
                     $stmt->execute();
 
@@ -99,40 +101,50 @@ $id_t=$_SESSION['user']['id'];
                             <p>Обучение: <?=$row['choice']?></p>
                         </div>
                     </div>
+                                             
+                    <?php    
+                        }
+                    }
+                    ?>
+                    <!-- Данные репетитора -->
  
                     <div class="">
                         <h1 class="text-xl text-h1_color font-bold text-center mt-12">Занятия</h1>
                     </div>
-                        <div class="grid grid-rows-1 px-3 mt-6 gap-y-5">
 
-                            <div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center">
-                                <div class="flex justify-around mt-2">
-                                <p class="ml-3 text-sm text-BEACD2 font-bold">Индивидуальные занятия</p>
-                            </div>
-                            <p class="text-12px mt-2 mb-5 text-text_color">Информатика 7-9 классы</p>
-                            <div class="w-6 h-6 bg-BEACD2 rounded-xl float-right -mt-12 mr-4"></div>
-                            </div>
-                           
-                            <div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center">
-                                <div class="flex justify-around mt-2">
-                                <p class="ml-3 text-sm text-BEACD2 font-bold">Индивидуальные занятия</p>
-                            </div>
-                            <p class="text-12px mt-2 mb-5 text-text_color bold">Информатика 7-9 классы</p>
-                            <div class="w-6 h-6 bg-BEACD2 rounded-xl float-right -mt-12 mr-4"></div>
-                            </div>
+                    <!-- Занятия -->
+                    <?php
+                    require_once("db.php");
+                    $query=$pdo->prepare("SELECT * FROM courses inner join teacher_info on(teacher_info.id_teacher = courses.id_teach) where id_teach='$id'");
+                    $query->execute();
+                    $result=$query->fetchAll(PDO::FETCH_ASSOC);
 
-                            <div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center">
+                    if($result){
+                        foreach($result as $row){
+                            $_SESSION['courses'] = [
+                            "name_courses" => $row["name"],
+                            "count" => $row["count"],
+                            "time" => $row['time'],
+                            ];
+                    ?>
+                    <div class="grid grid-rows-1 px-3 mt-6 gap-y-5">
+                  <div class="grid grid-rows-1 px-3 mt-6 gap-y-5">
+                            <div class="w-60 h-15 rounded-border_ret bg-EAE0F5 text-white text-center">
                                 <div class="flex justify-around mt-2">
-                                <p class="ml-3 mb-2 text-sm text-BEACD2 font-bold">Индивидуальные занятия</p>
+                                <p class="ml-3 text-sm text-BEACD2 font-bold"><?=$_SESSION['courses']['name_courses']?></p>
                             </div>
-                            <p class="text-12px mt-2 mb-5 text-text_color bold">Информатика 7-9 классы</p>
+                            <p class="text-12px mt-2 mb-2 text-text_color"><?=$_SESSION['courses']['count']?></p>
+                            <p class="text-12px mt-2 mb-5 text-text_color"><?=$_SESSION['courses']['time']?></p>
                             <div class="w-6 h-6 bg-BEACD2 rounded-xl float-right -mt-12 mr-4"></div>
                             </div>
-                    </div>
+                            </div>
+                            <!-- Занятия -->
+                         
 <?php    
                         }
                     }
                     ?>
+
 
                   
 
@@ -176,16 +188,5 @@ $id_t=$_SESSION['user']['id'];
                 
                 </div>
         </div>
-<!--  
-        <footer class="flex justify-between px-24 bg-footer_color text-white mt-24">
-            <div class="mt-3 flex flex-col">
-                Язык
-                <div class="">English</div>
-            <div class="">Русский</div>
-            </div>
-            
-            <div class="flex items-center justify-center">Сервис создан с помощью...</div>
-            </footer> -->
-
     </body>
     </html>

@@ -104,7 +104,7 @@ $id_t=$_SESSION['user']['id'];
                     <div class="">
                         <h1 class="text-xl text-h1_color font-bold text-center mt-12">Занятия</h1>
                     </div>
-                    <div class="grid grid-rows-1 px-3 mt-6 gap-y-5">
+                    
                     <?php
                     require_once("db.php");
                     $query=$pdo->prepare("SELECT * FROM courses inner join teacher_info on(teacher_info.id_teacher = courses.id_teach) where id_teach='$id_t'");
@@ -116,29 +116,33 @@ $id_t=$_SESSION['user']['id'];
                             $_SESSION['courses'] = [
                             "name_courses" => $row["name"],
                             "count" => $row["count"],
-                            "datatime" => $row['datatime'],
+                            "time" => $row['time'],
                             ];
                     ?>
-                  
-                            <div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center">
+                  <div class="grid grid-rows-1 px-3 mt-6 gap-y-5">
+                            <div class="w-60 h-15 rounded-border_ret bg-EAE0F5 text-white text-center">
                                 <div class="flex justify-around mt-2">
                                 <p class="ml-3 text-sm text-BEACD2 font-bold"><?=$_SESSION['courses']['name_courses']?></p>
                             </div>
                             <p class="text-12px mt-2 mb-2 text-text_color"><?=$_SESSION['courses']['count']?></p>
-                            <p class="text-12px mt-2 mb-5 text-text_color"><?=$_SESSION['courses']['datatime']?></p>
+                            <p class="text-12px mt-2 mb-5 text-text_color"><?=$_SESSION['courses']['time']?></p>
                             <div class="w-6 h-6 bg-BEACD2 rounded-xl float-right -mt-12 mr-4"></div>
                             </div>
                             </div>
 
-                          <div class="flex justify-center items-center mb-5">
-                            <a href="./edit.php?id=<?=$_SESSION['user']['id']?>" class="mt-8 text-center text-D1408C underline">Редактировать</a>
-                          </div>
+                         
 <?php    
                         }
                     }
                     ?>
 
-                  
+                        <div class="flex justify-center items-center mb-5">
+                            <a href="./edit.php?id=<?=$_SESSION['user']['id']?>" class="mt-8 text-center text-D1408C underline">Редактировать</a>
+                          </div>
+
+                          <div class="flex justify-center items-center mb-5">
+                            <a href="./add-course.php?id=<?=$_SESSION['user']['id']?>" class="mt-8 text-center text-D1408C underline">Добавить занятия</a>
+                          </div>
 
                 </div>
 
