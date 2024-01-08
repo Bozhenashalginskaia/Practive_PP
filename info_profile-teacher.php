@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Редактирование</title>
+    <title>Данные</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
 </head>
@@ -47,16 +47,13 @@
 
                 <div class="grid">
                     
-                         <form action="./edit_teacher.php" method="POST">
-                         <input type="text" name="name" placeholder="ФИО">
-                         <input type="file" name="avatar" placeholder="avatar">
-
+                         <form action="./info_teacher.php" method="POST">
                           <input type="text" name="subject" placeholder="Предмет" required>
                           <input type="text" name="experience" placeholder="Стаж" required>
                           <input type="text" name="age" placeholder="Возраст" required>
                           <input type="text" name="choice" placeholder="Формат обучения (онлайн/оффлайн)" required>
                           <input type="text" name="about" placeholder="О себе" required>
-                          <input type="text" name="practice" placeholder="Опыт">
+                          <input type="text" name="practice" placeholder="Опыт" required>
                           <input type="text" name="skills" placeholder="Компетенции" required>
                             <div class="flex items-center justify-center mt-24">
                      <input type="submit" name="update_teacher" class="text-center  text-white px-6 

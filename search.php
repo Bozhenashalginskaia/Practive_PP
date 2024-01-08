@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
+    <title>Поиск</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
 </head>
@@ -46,9 +46,13 @@ session_start();
                  <div class="container bg-white rounded-border_ret my-4 ">
                     <div class="">
                         <div class="mb-3 mt-10 ">
+                        <div class="search_box">
+                            <form action="ajax_search.php" method="POST">
                             <div class="relative mb-4 flex w-full flex-wrap items-stretch">
                               <input
                                 type="search"
+                                name="search"
+                                id="search"
                                 class="relative m-0 -mr-0.5 block min-w-0 flex-auto rounded-border_ret border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none "
                                 placeholder="Search"
                                 aria-label="Search"
@@ -63,13 +67,16 @@ session_start();
                                 data-te-ripple-color="light">
                                <img src="./img/clip.svg" alt="">
                               </button>
+                            </form>
+                        </div>
+                            <div id="search_box-result"></div>
                             </div>
                           </div>
                     </div>
                     <div class="">
                         <h1 class="text-2xl text-h1_color font-bold text-center mt-12">Репетиторы</h1>
                     </div>
-                    <div class="overflow-auto h-2/4 grid">
+                    <div class="overflow-auto h-full max-h-450 scroll-smooth focus:scroll-auto">
                     <div class="mt-10 flex flex-col justify-items-start gap-x-10">
                                 
                                 <?php
@@ -93,29 +100,19 @@ session_start();
                                     <h2 class="text-lg">'.$teacher_name.'</h2>
                                     <span class="text-sm text-center">'.$subject.'</span>
                                 </div>
-                                <a href="./profile_teacher.php?Id='.$id.'" class="text-p_color_forms underline">посмотреть профиль</a>
+                                <a href="./profile_teacher-public.php?Id='.$id.'" class="text-p_color_forms underline">посмотреть профиль</a>
                                 </div>
                                     ';
                                 }
                                 ?>
                             
                     </div>
-                    </div>
+                    
+                </div>
                  </div>
 
                 </div>
                 </div>
-
-                <!-- <footer class="flex justify-between px-24 bg-footer_color text-white mt-24">
-                    <div class="mt-3 flex flex-col">
-                        Язык
-                        <div class="">English</div>
-                    <div class="">Русский</div>
-                    </div>
-                    
-                    <div class="flex items-center justify-center">Сервис создан с помощью...</div>
-                    </footer> -->
-
            </body>
            </html>
         

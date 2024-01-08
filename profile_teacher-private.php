@@ -8,7 +8,7 @@ $id_t=$_SESSION['user']['id'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
+    <title>Профиль</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
 
@@ -71,7 +71,7 @@ $id_t=$_SESSION['user']['id'];
                     if($result){
                         foreach($result as $row){
                             $_SESSION['teacher'] = [
-                            "id" => $row['id'],
+                            "id" => $row['id_teacher'],
                             "experience" =>$row['experience'],
                             "age" => $row['age'],
                             "choice" => $row['choice'],
@@ -130,7 +130,7 @@ $id_t=$_SESSION['user']['id'];
 
                     
                           <div class="flex justify-center items-center mb-5">
-                            <a href="./edit.php<?=$_SESSION['user']['id']?>" class="mt-8 text-center text-D1408C underline">Редактировать</a>
+                            <a href="./edit.php?id=<?=$_SESSION['user']['id']?>" class="mt-8 text-center text-D1408C underline">Редактировать</a>
                           </div>
 <?php    
                         }
@@ -144,7 +144,6 @@ $id_t=$_SESSION['user']['id'];
                 
                     <div class="bg-white rounded-border_ret row-start-1 col-span-1 ml-14">
                     
-                    <!-- <form action="">
 
                     <div class="">
                         <h1 class="text-2xl text-h1_color font-bold text-center mt-16">О себе</h1>
@@ -160,11 +159,6 @@ $id_t=$_SESSION['user']['id'];
                                                 <h1 class="text-2xl text-h1_color font-bold text-center mt-16">Компетенции</h1>
                                                 <p class="text-h1_color mt-6 text-base text-center"><?=$_SESSION['teacher']['skills']?></p>
                                                         </div>
-
-                    </form> -->
-                                                        <div class="flex justify-center text-center mt-10">
-                                                        <a class="text-center text-p_color_forms underline" href="./search.html">Вернуться к поиску</a>
-                                                        </div>
                             </div>
 
                          
@@ -174,14 +168,9 @@ $id_t=$_SESSION['user']['id'];
                 </div>
                 
             </div>
-            <!-- <div class="flex">
-            <div class=""><img class="-ml-5.5rem  h-300" src="./img/ret.svg" alt=""></div>
-                <div class=""><h1 class="text-2xl text-h1_color font-bold text-center">Мои занятия</h1>
-                </div> -->
+            
                 </div>
-                    <div class="">
-                
-            </div>
+               
             </div>
                 
                 </div>

@@ -12,16 +12,6 @@ $_SESSION["name"] = $name;
 
 $_SESSION["role"] = $role;
 
-// if(!preg_match("/^[a-zA-Z0-9]+$/",$login))
-// {
-//     $_SESSION['message'] = "Логин может состоять только из букв английского алфавита и цифр";
-// }
-
-// if(strlen($login) < 3 or strlen($login) > 30)
-// {
-//     $_SESSION['message'] = "Логин должен быть не меньше 3-х символов и не больше 30";
-// }
-
 if ($password !== $repeatpassword) {
     $_SESSION['message'] = 'Пароли не совпадают';
     header('Location: ./registration.php');
@@ -81,13 +71,38 @@ try {
 
 
     if($sql_execute){
+        $sql = $pdo->prepare("SELECT * FROM users WHERE `password`=:password and `login`=:login");
+
+        $sql->bindParam(':password', $password);
+        $sql->bindParam(':login', $login);
+        $sql->execute();
+        $sql_execute=$sql->fetchAll(PDO::FETCH_ASSOC);
+        
+        if($sql_execute){
+        foreach($sql_execute as $user){
+            $_SESSION['user'] = [
+                "id" => $user['id'],
+                "name" => $user['username'],
+                "avatar" => $user['avatar'],
+                "login" => $user['login'],
+                "role" => $user['role']
+            ];
+        }
+        }
     $_SESSION['message'] = "Вы успешно зарегистрировались";
+    }
+    else{
+        $_SESSION['message'] = "Не добавлено";
+        exit(0);
+    }
+
+    if ($role == 'teacher'){
+    header("Location: ./info_profile-teacher.php");
+    exit(0);
+    } else {
     header ("Location: ./authorization.php");
     exit(0);
-} else{
-    $_SESSION['message'] = "Не добавлено";
-    exit(0);
-}
+    }
 }
 }
 catch (PDOException $e) {

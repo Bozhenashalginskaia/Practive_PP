@@ -2,7 +2,7 @@
 
  $id_from = $_SESSION['user']['id'];
   if(  $_SESSION['user']['role'] !== "student"){ 
-    header("Location: ./profile_teacher.php"); }
+    header("Location: ./profile_teacher-private.php"); }
 
 ?>
 <!DOCTYPE html>
