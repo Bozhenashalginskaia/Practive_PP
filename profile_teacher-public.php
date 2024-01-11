@@ -1,7 +1,8 @@
 <?php
 session_start();
 $id = $_GET["Id"];
-$id_t=$_SESSION['user']['id'];
+$id_user=$_SESSION['user']['id'];
+
 ?>
 
 <!DOCTYPE html>
@@ -48,13 +49,7 @@ $id_t=$_SESSION['user']['id'];
         </header>
         <!-- End left Navbar -->
 
-        <!-- <div class="container mx-auto bg-gradient-to-r from-colors_left from-10% to-white to-90% rounded-border_ret my-4">
-            <div class="flex flex-1">
-                <p class="pr-6">Text</p>
-                <div
-                  class="inline-block h-[250px] min-h-[1em] w-0.5 self-stretch bg-black opacity-100 dark:opacity-50"></div>
-                <p class="pl-6">Text</p>
-              </div> -->
+        
 
               <div class="container mx-auto grid rounded-border_ret bg-white my-4">
                     <div class="bg-colors_left -ml-5.5rem rounded-border_ret row-start-1 
@@ -100,8 +95,7 @@ $id_t=$_SESSION['user']['id'];
                             <p>Возраст: <?=$row['age']?></p>
                             <p>Обучение: <?=$row['choice']?></p>
                         </div>
-                    </div>
-                                             
+                    </div>                   
                     <?php    
                         }
                     }
@@ -113,7 +107,8 @@ $id_t=$_SESSION['user']['id'];
                     </div>
 
                     <!-- Занятия -->
-                    <?php
+                    
+                            <?php
                     require_once("db.php");
                     $query=$pdo->prepare("SELECT * FROM courses inner join teacher_info on(teacher_info.id_teacher = courses.id_teach) where id_teach='$id'");
                     $query->execute();
@@ -125,32 +120,35 @@ $id_t=$_SESSION['user']['id'];
                             "name_courses" => $row["name"],
                             "count" => $row["count"],
                             "time" => $row['time'],
+                            "data" => $row["day"],
+                            "id" => $row["id_teacher"],
                             ];
                     ?>
-                    <div class="grid grid-rows-1 px-3 mt-6 gap-y-5">
+                    <div class="">
+                        <!-- Add overflow -->
                   <div class="grid grid-rows-1 px-3 mt-6 gap-y-5">
                             <div class="w-60 h-15 rounded-border_ret bg-EAE0F5 text-white text-center">
                                 <div class="flex justify-around mt-2">
                                 <p class="ml-3 text-sm text-BEACD2 font-bold"><?=$_SESSION['courses']['name_courses']?></p>
                             </div>
                             <p class="text-12px mt-2 mb-2 text-text_color"><?=$_SESSION['courses']['count']?></p>
+                            <div class="flex justify-center mr-2">
                             <p class="text-12px mt-2 mb-5 text-text_color"><?=$_SESSION['courses']['time']?></p>
-                            <div class="w-6 h-6 bg-BEACD2 rounded-xl float-right -mt-12 mr-4"></div>
+                            <p class="text-12px mt-2 mb-5 text-text_color"><?=$_SESSION['courses']['data']?></p>
+                            </div>
+                            <a href="./application.php?Id=<?=$_SESSION['courses']['id']?>"><div class="w-6 h-6 bg-BEACD2 rounded-xl float-right -mt-12 mr-4"></div></a>
                             </div>
                             </div>
-                            <!-- Занятия -->
+                    </div>
+
                          
 <?php    
                         }
                     }
                     ?>
+                         
 
-
-                  
-
-                </div>
-
-                
+                    </div>
                     <div class="bg-white rounded-border_ret row-start-1 col-span-1 ml-14">
                     
 
@@ -172,6 +170,10 @@ $id_t=$_SESSION['user']['id'];
                 
                                                         <div class="flex justify-center text-center mt-10">
                                                         <a class="text-center text-p_color_forms underline" href="./search.php">Вернуться к поиску</a>
+                                                        </div>
+                                                        <div class="flex justify-center text-center mt-10">
+                                                        <button type="submit" name="submit" class="text-center  text-white px-6 
+                          py-3 bg-btn_color  rounded-border w-27 text-sm" placeholder="Зарегистрироваться">Написать репетитору</button>
                                                         </div>
                             </div>
 

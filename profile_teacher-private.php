@@ -117,6 +117,7 @@ $id_t=$_SESSION['user']['id'];
                             "name_courses" => $row["name"],
                             "count" => $row["count"],
                             "time" => $row['time'],
+                            "data" => $row["day"],
                             ];
                     ?>
                   <div class="grid grid-rows-1 px-3 mt-6 gap-y-5">
@@ -125,7 +126,10 @@ $id_t=$_SESSION['user']['id'];
                                 <p class="ml-3 text-sm text-BEACD2 font-bold"><?=$_SESSION['courses']['name_courses']?></p>
                             </div>
                             <p class="text-12px mt-2 mb-2 text-text_color"><?=$_SESSION['courses']['count']?></p>
+                            <div class="flex justify-center mr-2">
                             <p class="text-12px mt-2 mb-5 text-text_color"><?=$_SESSION['courses']['time']?></p>
+                            <p class="text-12px mt-2 mb-5 text-text_color"><?=$_SESSION['courses']['data']?></p>
+                            </div>
                             <div class="w-6 h-6 bg-BEACD2 rounded-xl float-right -mt-12 mr-4"></div>
                             </div>
                             </div>
@@ -143,6 +147,61 @@ $id_t=$_SESSION['user']['id'];
                           <div class="flex justify-center items-center mb-5">
                             <a href="./add-course.php?id=<?=$_SESSION['user']['id']?>" class="mt-8 text-center text-D1408C underline">Добавить занятия</a>
                           </div>
+
+                          <div class="">
+                        <h1 class="text-xl text-h1_color font-bold text-center mt-12">Заявки</h1>
+                    </div>
+
+                    <?php
+                    require_once("db.php");
+                    $query=$pdo->prepare("SELECT * FROM requests inner join users on(requests.taker=users.id) where accept = 0");
+                    $query->execute();
+
+                    $result=$query->fetchAll(PDO::FETCH_ASSOC);
+
+                    
+                        foreach($result as $row){
+                            $_SESSION['requests'] = [
+                            "username" => $row["username"],
+                            "id" => $row["taker"],
+                            // добавить курс который он выбрал
+                            ];
+
+                            $course = $pdo->prepare("SELECT * FROM courses WHERE id_teach = $id_t");
+                            $course->execute();
+                            
+                            $res = $course->fetchAll(PDO::FETCH_ASSOC);
+
+                                foreach($res as $info){ 
+                                    $_SESSION["course"] = [
+                                    "course_id" => $info['id_course'],
+                                    "course_name" => $info['name'],
+                                    ]
+                            
+
+
+
+                    ?>
+                  <div class="grid grid-rows-1 px-3 mt-6 gap-y-5">
+                            <div class="w-60 h-15 rounded-border_ret bg-EAE0F5 text-white text-center">
+                                <div class="flex justify-around mt-2">
+                                <p class="ml-3 text-sm text-BEACD2 font-bold"><?=$_SESSION['requests']['username']?></p>
+                                <p class="ml-3 text-sm text-BEACD2 font-bold"><?=$_SESSION['course']['course_name']?></p>
+                                
+                                <a href="profile_teacher.php?ok=<?=$_SESSION['requests']['id']?>"><i class='glyphicon glyphicon-plus'></i>*Принять</a>
+                                <a href="profile_teacher.php?no=<?=$_SESSION['requests']['id']?>"><i class='glyphicon glyphicon-remove'></i>*Отклонить</a>
+                            </div>
+                            
+                            </div>
+                            </div>
+
+                         
+<?php    
+                          }
+                        }
+                    
+            
+                    ?>
 
                 </div>
 
@@ -180,16 +239,5 @@ $id_t=$_SESSION['user']['id'];
                 
                 </div>
         </div>
-<!--  
-        <footer class="flex justify-between px-24 bg-footer_color text-white mt-24">
-            <div class="mt-3 flex flex-col">
-                Язык
-                <div class="">English</div>
-            <div class="">Русский</div>
-            </div>
-            
-            <div class="flex items-center justify-center">Сервис создан с помощью...</div>
-            </footer> -->
-
     </body>
     </html>

@@ -169,68 +169,81 @@ $users =$_SESSION['sms']['id'];
                 </div>
         </div>
 
-        <script>
-            $(document).ready(function() {
 
-                let start = 0;
+ <script>
 
-                setInterval(loadMessages, 1000);
+    $(document).ready(function() {
 
-                function loadMessages() {
-          
-                $.ajax({
+        let start = 0;
 
-                    url: "ajax.php?start=" +start,
-                    dataType: 'json',
-                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        console.log(XMLHttpRequest);
-                    }
-                })
-                .done(function(data) {
-                    //console.log(data);
-                    data.forEach(item => {
-                        $(".messages-wrap").append(renderMessage(item));
-                        start = item.id_message;
-                        console.log(start);
-                    })
-                });   
-                console.log('обновлено...');         
+        setInterval(loadMessages, 1000);
+
+        function loadMessages() {
+
+        $.ajax({
+            url: "mes.php?start=" +start,
+            dataType: 'json',
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log( XMLHttpRequest);
             }
-            });
+        })
+        .done(function( data ) {
 
-            function renderMessage(item){
-                let params=(new URL(document.location)).searchParams;
-                 let from_id=parseInt(params.get("to_user"));
+            data.forEach(item => {
+
+                $(".messages-wrap").append(renderMessage(item));
+                start = item.id_message;
+                console.log(start);
+            })
 
 
-                if(item.from_id == from_id) {
+        });
+        console.log('обновлено...')
+    }
+    
+});
 
-                    return `<div class="float-right w-3/4 mt-5 rounded-border_ret bg-F4F4FE text-right flex -mr-14">
-                 <h1 class="px-8 py-4 text-right text-message text-sm">${item.message}</h1>
-                 </div>`
-            }
-         else {
-            return `
+    function renderMessage(item) {
+        let params=(new URL(document.location)).searchParams;
+        let to_user=params.get("to_user");
+       
+        
+        let time = new Date(item.datetime*1000);
+        let minutes = (time.getMinutes()< 10) ? '0' +time.getMinutes() : time.getMinutes();
+        let seconds = (time.getSeconds()< 10) ? '0' +time.getSeconds() : time.getSeconds();
+        time = `${time.getHours()}:${minutes}:${seconds}`;
+
+//item.username == username
+if(item.to_user == to_user) {
+            return 
+            `
             <h1 class="px-8 mt-4 text-left text-gray-500 text-xs">${item.datetime}</h1>
         <div class="w-3/4 mt-1 ml-6 py-13 rounded-border_ret bg-F4F4FE text-left flex">
         <h1 class="px-8 py-4 text-left text-message text-sm">${item.message}</h1>
                             </div>
                 `;
             
-        }
+            
+       } else {
+            return 
+            `<div class="float-right w-3/4 mt-5 rounded-border_ret bg-F4F4FE text-right flex -mr-14">
+                 <h1 class="px-8 py-4 text-right text-message text-sm">
+                                ${item.message}</h1>
+                            </div>`
+       }
+        
     }
-
-            // добавление сообщения в БД
+// добавление сообщения в БД
     $('#chat-click').submit(function(e){
-        $.post("ajax.php?action=add_message", {
+ //let from_id=params.get("from_id");
+        $.post("mes.php?action=add_message", {
         //текст сообщения введенного в input
             message: $('#message_text').val(),
-            from_id: from_id
+            from_id: 229
         }).done(function(data) {$('#message_text').val('')});
 
         return false;
     })   
-
-        </script>
-        </body>
+ </script>
+    </body>
     </html>

@@ -55,7 +55,7 @@ session_start();
                             px-3 py-2 bg-input_forms border shadow-sm border-input_forms 
                             focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full  
                             sm:text-sm focus:ring-1" >Загрузить фото</label>
-                            <input type="file" id="hidden" name="avatar" required id="upload-photo"/>
+                            <input type="file" hidden name="avatar" required id="upload-photo"/>
                             
                        
                             <input placeholder="Пароль" type="password" name="password" required class="

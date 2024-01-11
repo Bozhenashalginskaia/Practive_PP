@@ -96,20 +96,29 @@
 
                             $result=$sql->fetchAll(PDO::FETCH_ASSOC);
 
-                            foreach($result as $row){
-                                $username = $row['username'];
-                                // $avatar = $row['avatar'];
-                                $id_to = $row['id'];
+                            if($result){
+                                foreach($result as $row){
+                                    $_SESSION['teach'] = [
+                                    "username" => $row["username"],
+                                    "id_to" => $row["id"],
+                                    ];
+
+                            // foreach($result as $row){
+                            //     $username = $row['username'];
+                            //     // $avatar = $row['avatar'];
+                            //     $id_to = $row['id'];
 
                             echo ' <div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
-                            <a href="./message.php?id='.$id_to.' class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
+                            <a href="./message.php?Id='.$_SESSION['teach']['id_to'].'" class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
                             <div class="flex justify-around mt-2">
-                            <p class="ml-3 text-sm text-BEACD2">'.$username.'</p>
+                            <p class="ml-3 text-sm text-BEACD2">'.$_SESSION['teach']['username'].'</p>
                         </div>
                         <img class="ml-3 " src=<?=$avatar?>
                     </a>
                     </div>';
                                 }}
+                            }
+                        
                         
                             ?>
 
@@ -162,10 +171,10 @@
                           </nav> 
                     </div>
 
-                    <div class="flex justify-center items-center">
+                    <!-- <div class="flex justify-center items-center">
                         
                             <a href="student-edit.php?id=<?=$row['id']?>" class="mt-8 text-center text-D1408C underline">Редактировать</a>
-                          </div>
+                          </div> -->
                 </div>
 
                 <!-- Message -->
@@ -201,17 +210,30 @@
                             <div class="overflow-auto h-full max-h-450 scroll-smooth focus:scroll-auto" >
                                 <!-- max height 350px -->
                                 
-                            
+                            <?php
+                            require_once("db.php");
+
+                            $sql= $pdo->prepare("SELECT * FROM courses_status inner join courses on(courses_status.id_course=courses.id_course) where id_student = '$id_from'");
+                            $sql->execute();
+                            $data=$sql->fetchAll(PDO::FETCH_ASSOC);
+                            foreach($data as $user){
+                                $_SESSION ["data_course"] = [
+                                    "name_course"=> $user["name"],
+                                    "count" => $user["count"],
+                                    "time" => $user["time"],
                                     
-                            <div class="w-104 h-35 rounded-border_f bg-F4F4FE text-center flex">
-                                <img class="mt-5 ml-3" src="./img/books.svg" alt="">
+                                ]
+                            ?>
+                                    
+                            <div class="mb-5 w-104 h-35 rounded-border_f bg-F4F4FE text-center flex">
+                                <img class="mt-3 ml-3" src="./img/books.svg" alt="">
                                 <div class="text-D1408C text-center">
-                                    <p class="text-D1408C text-2xl text-center mt-6">Программирование</p>
+                                    <p class="text-D1408C text-2xl text-center mt-6"><?=$_SESSION['data_course']['name_course']?></p>
                                     <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
                                     <div class="flex text-sm justify-around mt-2">
                                         <div class="mb-4">
                                             <p>Пн</p>
-                                            <p>12:30</p>
+                                            <p><?=$_SESSION['data_course']['time']?></p>
                                         </div>
                                         
                                         <div class="">
@@ -221,103 +243,9 @@
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="mt-5 w-85 h-35 rounded-border_ret bg-F4F4FE text-center flex">
-                                <img class="mt-8 ml-8" src="./img/books.svg" alt="">
-                                <div class="text-D1408C text-center">
-                                    <p class="text-D1408C text-2xl text-center mt-6">Программирование</p>
-                                    <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
-                                    <div class="flex text-sm justify-around mt-2">
-                                        <div class="mb-4">
-                                            <p>Пн</p>
-                                            <p>12:30</p>
-                                        </div>
-                                        
-                                        <div class="">
-                                            <p>Ср</p>
-                                            <p>12:30</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-5 w-85 h-35 rounded-border_ret bg-F4F4FE text-center flex">
-                                <img class="mt-8 ml-8" src="./img/books.svg" alt="">
-                                <div class="text-D1408C text-center">
-                                    <p class="text-D1408C text-2xl text-center mt-6">Программирование</p>
-                                    <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
-                                    <div class="flex text-sm justify-around mt-2">
-                                        <div class="mb-4">
-                                            <p>Пн</p>
-                                            <p>12:30</p>
-                                        </div>
-                                        
-                                        <div class="">
-                                            <p>Ср</p>
-                                            <p>12:30</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-5 w-85 h-35 rounded-border_ret bg-F4F4FE text-center flex">
-                                <img class="mt-8 ml-8" src="./img/books.svg" alt="">
-                                <div class="text-D1408C text-center">
-                                    <p class="text-D1408C text-2xl text-center mt-6">Программирование</p>
-                                    <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
-                                    <div class="flex text-sm justify-around mt-2">
-                                        <div class="mb-4">
-                                            <p>Пн</p>
-                                            <p>12:30</p>
-                                        </div>
-                                        
-                                        <div class="">
-                                            <p>Ср</p>
-                                            <p>12:30</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-5 w-85 h-35 rounded-border_ret bg-F4F4FE text-center flex">
-                                <img class="mt-8 ml-8" src="./img/books.svg" alt="">
-                                <div class="text-D1408C text-center">
-                                    <p class="text-D1408C text-2xl text-center mt-6">Программирование</p>
-                                    <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
-                                    <div class="flex text-sm justify-around mt-2">
-                                        <div class="mb-4">
-                                            <p>Пн</p>
-                                            <p>12:30</p>
-                                        </div>
-                                        
-                                        <div class="">
-                                            <p>Ср</p>
-                                            <p>12:30</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-5 w-85 h-35 rounded-border_ret bg-F4F4FE text-center flex">
-                                <img class="mt-8 ml-8" src="./img/books.svg" alt="">
-                                <div class="text-D1408C text-center">
-                                    <p class="text-D1408C text-2xl text-center mt-6">Программирование</p>
-                                    <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
-                                    <div class="flex text-sm justify-around mt-2">
-                                        <div class="mb-4">
-                                            <p>Пн</p>
-                                            <p>12:30</p>
-                                        </div>
-                                        
-                                        <div class="">
-                                            <p>Ср</p>
-                                            <p>12:30</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <?php
+                            }
+                            ?>
                         </div>
                             
                         </div>

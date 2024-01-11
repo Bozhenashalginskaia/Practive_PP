@@ -9,6 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Поиск</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
 </head>
@@ -47,19 +48,21 @@ session_start();
                     <div class="">
                         <div class="mb-3 mt-10 ">
                         <div class="search_box">
-                            <form action="ajax_search.php" method="POST">
+                             
                             <div class="relative mb-4 flex w-full flex-wrap items-stretch">
                               <input
                                 type="search"
                                 name="search"
                                 id="search"
+                                autocomplete="off"
+                                placeholder="Введите фамилию ..."
                                 class="relative m-0 -mr-0.5 block min-w-0 flex-auto rounded-border_ret border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none "
-                                placeholder="Search"
                                 aria-label="Search"
                                 aria-describedby="button-addon1" />
                           
                               <!--Search button-->
                               <button
+                              name="submit"
                                 class="relative z-[2] ml-5 flex items-center rounded-border_ret bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
                                 type="button"
                                 id="button-addon1"
@@ -67,15 +70,19 @@ session_start();
                                 data-te-ripple-color="light">
                                <img src="./img/clip.svg" alt="">
                               </button>
-                            </form>
+                           
+
+                            
+
                         </div>
-                            <div id="search_box-result"></div>
-                            </div>
+                            <!-- <div id="search_box-result"></div>
+                            </div> -->
                           </div>
                     </div>
                     <div class="">
                         <h1 class="text-2xl text-h1_color font-bold text-center mt-12">Репетиторы</h1>
                     </div>
+                    <div id="output">
                     <div class="overflow-auto h-full max-h-450 scroll-smooth focus:scroll-auto">
                     <div class="mt-10 flex flex-col justify-items-start gap-x-10">
                                 
@@ -108,11 +115,41 @@ session_start();
                             
                     </div>
                     
+                    </div>
                 </div>
                  </div>
 
                 </div>
                 </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $("#search").keyup(function() {
+                            var query = $(this).val();
+                            if(query !=""){
+                                $.ajax({
+                                    url:'search-teacher.php',
+                                    method: 'POST',
+                                    data: {
+                                        query:query
+                                    },
+                                    success:function(data) {
+                                        $('#output').html(data);
+                           // $('#output').css('display', 'block');
+
+                            $("#search").focusout(function() {
+                               // $('#output').css('display', 'none');
+                            });
+                            $("#search").focusin(function() {
+                              //  $('#output').css('display', 'block');
+                                    });
+                                }
+                                });
+                            } else {
+                                //$('#output')
+                            }
+                        });
+                    });
+                </script>
            </body>
            </html>
         
