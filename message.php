@@ -130,7 +130,7 @@ $users =$_SESSION['sms']['id'];
                     </div>
                         </div>
                         <!-- Вывод сообщений -->
-                        <div class="mt-16 ml-6 messages-wrap overflow-auto h-2/4">
+                        <div class="mt-16 ml-6 messages-wrap overflow-y-auto h-2/4">
                        
                         </div>
                          <!--Вывод сообщений -->
@@ -199,33 +199,37 @@ $users =$_SESSION['sms']['id'];
             });
 
             function renderMessage(item){
-                let params=(new URL(document.location)).searchParams;
-                 let from_id=parseInt(params.get("to_user"));
+               let params=(new URL(document.location)).searchParams;
+                let from_id=params.get("from_id");
 
 
-                if(item.from_id == from_id) {
+              if(item.from_id == from_id) {
 
-                    return `<div class="float-right w-3/4 mt-5 rounded-border_ret bg-F4F4FE text-right flex -mr-14">
-                 <h1 class="px-8 py-4 text-right text-message text-sm">${item.message}</h1>
-                 </div>`
-            }
-         else {
-            return `
+                    return `
             <h1 class="px-8 mt-4 text-left text-gray-500 text-xs">${item.datetime}</h1>
         <div class="w-3/4 mt-1 ml-6 py-13 rounded-border_ret bg-F4F4FE text-left flex">
         <h1 class="px-8 py-4 text-left text-message text-sm">${item.message}</h1>
                             </div>
                 `;
+           }
+        else {
+           return `<div class="float-right w-3/4 mt-5 rounded-border_ret bg-F4F4FE text-right flex -mr-14">
+                <h1 class="px-8 py-4 text-right text-message text-sm">${item.message}</h1>
+                </div>`;
             
-        }
+            
+       }
     }
 
             // добавление сообщения в БД
     $('#chat-click').submit(function(e){
+        let params=(new URL(document.location)).searchParams;
+        let from_id=params.get("from_id");
         $.post("ajax.php?action=add_message", {
         //текст сообщения введенного в input
             message: $('#message_text').val(),
             from_id: from_id
+            //айди пользователя 
         }).done(function(data) {$('#message_text').val('')});
 
         return false;
