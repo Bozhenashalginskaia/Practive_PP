@@ -13,7 +13,7 @@ $id_user=$_SESSION['user']['id'];
     <title>Профиль</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.14/dist/tailwind.min.css" />
 </head>
 
 
@@ -26,7 +26,7 @@ $id_user=$_SESSION['user']['id'];
 
 
 
-        <div class="flex mt-20">
+        <div class="flex mt-8">
     <!-- Start left Navbar -->
     <header class="mr-12">
         <div class="flex flex-col">
@@ -51,7 +51,7 @@ $id_user=$_SESSION['user']['id'];
 
         
 
-              <div class="container mx-auto grid rounded-border_ret bg-white my-4">
+              <div class="container grid rounded-border_ret bg-white my-4">
                     <div class="bg-colors_left -ml-5.5rem rounded-border_ret row-start-1 
                     col-span-3">
                     <div class="flex flex-col">
@@ -121,13 +121,14 @@ $id_user=$_SESSION['user']['id'];
                             "count" => $row["count"],
                             "time" => $row['time'],
                             "data" => $row["day"],
-                            "id" => $row["id_teacher"],
+                            "id_course" => $row["id_course"],
+                            "id_teacher" => $row["id_teacher"],
                             ];
                     ?>
                     <div class="">
                         <!-- Add overflow -->
                   <div class="grid grid-rows-1 px-3 mt-6 gap-y-5">
-                            <div class="w-60 h-15 rounded-border_ret bg-EAE0F5 text-white text-center">
+                            <div class="w-82 h-15 rounded-border_ret bg-EAE0F5 text-white text-center">
                                 <div class="flex justify-around mt-2">
                                 <p class="ml-3 text-sm text-BEACD2 font-bold"><?=$_SESSION['courses']['name_courses']?></p>
                             </div>
@@ -136,11 +137,43 @@ $id_user=$_SESSION['user']['id'];
                             <p class="text-12px mt-2 mb-5 text-text_color"><?=$_SESSION['courses']['time']?></p>
                             <p class="text-12px mt-2 mb-5 text-text_color"><?=$_SESSION['courses']['data']?></p>
                             </div>
-                            <a href="./application.php?Id=<?=$_SESSION['courses']['id']?>"><div class="w-6 h-6 bg-BEACD2 rounded-xl float-right -mt-12 mr-4"></div></a>
-                            </div>
+
+
+
+                            
+                            <a id="openModal" href="./application.php?Id=<?=$_SESSION['courses']['id_course']?>" class="w-6 h-6 bg-BEACD2 rounded-xl float-right -mt-12 mr-4"></a>
+                            
+               
+                        
+                     
+                        </div>
                             </div>
                     </div>
+                    <div id="modal" class=" fixed h-screen w-full  left-0 top-0 flex justify-center items-center bg-opacity-50 hidden">
+                    
 
+           
+              <!-- modal -->
+              <div class=" bg-purple-900 bg-opacity-50 text-white rounded-border_f shadow-lg w-10/12 md:w-1/3">
+                <!-- modal header -->
+                <div class="rounded-border_f border-b px-4 py-2 flex flex-col justify-between items-center bg-purple-600 bg-opacity-25">
+                  <h3 class="mt-10 font-semibold text-2xl px-10 break-words">Ваша заявка отправлена!</h3>
+                  <!-- <button class="text-white close-modal">&cross;</button> -->
+                
+                <!-- modal body -->
+                <div class="p-3 text-12px text-center mt-3 px-3 py-3">
+                    ожидайте одобрение репетитора, занятие появится в личном кабинете</div>
+                <div class="flex justify-center items-center w-100  p-3">
+                  <a href="./" id="closeModal" class="bg-purple-500 bg-opacity-75 hover:bg-purple-700 px-3 py-1 rounded-border_f text-white mr-1 close-modal">
+                  Okay</a>
+                 
+                </div>
+              </div>
+            </div>
+            </div>
+            
+    
+  
                          
 <?php    
                         }
@@ -168,18 +201,37 @@ $id_user=$_SESSION['user']['id'];
                                                         </div>
 
                 
-                                                        <div class="flex justify-center text-center mt-10">
-                                                        <a class="text-center text-p_color_forms underline" href="./search.php">Вернуться к поиску</a>
-                                                        </div>
+                                                       
                                                         <div class="flex justify-center text-center mt-10">
                                                         <button type="submit" name="submit" class="text-center  text-white px-6 
                           py-3 bg-btn_color  rounded-border w-27 text-sm" placeholder="Зарегистрироваться">Написать репетитору</button>
                                                         </div>
+                                                        <div class="flex justify-center text-center mt-10">
+                                                        <a class="text-center text-p_color_forms underline" href="./search.php">Вернуться к поиску</a>
+                                                        </div>
                             </div>
-
+<!-- 
                          
-                            
+                            <a  class=" text-black font-bold py-2 px-4 rounded">
+    Open Modal
+</a>
+
+  <div  class="fixed top-0 left-0 w-full h-full flex items-center justify-center hidden">
+    <div class="modal-dialog bg-white rounded shadow-lg w-1/3">
+      <div class="modal-content p-4">
+        <h2 class="text-xl font-bold">Modal Title</h2>
+        <p>This is a simple modal using Tailwind CSS and JavaScript.</p>
+        <a  class="bg-gray-500 hover:bg-gray-700 text-black font-bold py-2 px-4 rounded mt-4">
+          Close
+</a>
+      </div>
+    </div>
+  </div>  -->
+
+
+                        
                         </div>
+
                     </div>
                 </div>
                 
@@ -190,5 +242,30 @@ $id_user=$_SESSION['user']['id'];
                 
                 </div>
         </div>
+       
+      </div>
+    </div>
+  </div>
+        <script>
+            const openModalButton = document.getElementById("openModal");
+const closeModalButton = document.getElementById("closeModal");
+const modal = document.getElementById("modal");
+
+openModalButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    modal.classList.remove("hidden");
+});
+
+closeModalButton.addEventListener("click", () => {
+    
+    modal.classList.add("hidden");
+});
+
+document.addEventListener("click", (event) => {
+    if (event.target === modal) {
+        modal.classList.add("hidden");
+    }
+});
+        </script>
     </body>
     </html>

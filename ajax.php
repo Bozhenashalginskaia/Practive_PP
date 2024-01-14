@@ -1,8 +1,10 @@
 <?php
 session_start();
 require_once("db.php");
-$to_user = $_SESSION['sms']['id'];
+
+$to_user = $_SESSION['teacher_id_sms'];
 $from_id = $_SESSION['user']['id'];
+
 
  if(!isset($_GET['action'])) {
 

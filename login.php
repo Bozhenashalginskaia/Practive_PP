@@ -26,11 +26,12 @@ foreach($sql_execute as $user){
     $pass = $user['password'];
     if($pass == $password){ header('Location: ./index.php');}
     else{ 
+        header('Location: ./authorization.php');
         $_SESSION['message'] = "Неправильный логин или пароль";
         exit(0);}
    
      }  } else {
-    header('Location: ./autorization.php');
+    header('Location: ./authorization.php');
     $_SESSION['message'] = "Неправильный логин или пароль";
     exit(0);
 }

@@ -84,7 +84,7 @@ session_start();
                     </div>
                     <div id="output">
                     <div class="overflow-auto h-full max-h-450 scroll-smooth focus:scroll-auto">
-                    <div class="mt-10 flex flex-col justify-items-start gap-x-10">
+                    
                                 
                                 <?php
                                 include("db.php");
@@ -101,19 +101,24 @@ session_start();
 
                                     //$_SESSION['id'] = $id;
 
-                                    echo '<div class="mt-12 grid grid-rows-1 grid-flow-col justify-items-start ">
+                                    echo '
+                                    <div class="text-center mt-10 flex flex-col gap-x-15">
+                                    <div class="mt-12 grid grid-rows-1 grid-flow-col justify-items-start ">
                                     <img width="65" height="65" class="rounded-full" src="'.$avatar.'" alt="">
-                                    <div class="flex flex-col">
-                                    <h2 class="text-lg">'.$teacher_name.'</h2>
-                                    <span class="text-sm text-center">'.$subject.'</span>
+                                    <div class="grid">
+                                    <h2 class="text-lg text-focus">'.$teacher_name.'</h2>
+                                    <span class="text-sm text-gray-500 ">'.$subject.'</span>
                                 </div>
+                                <div class="grid ">
                                 <a href="./profile_teacher-public.php?Id='.$id.'" class="text-p_color_forms underline">посмотреть профиль</a>
+                                </div>
+                                </div>
                                 </div>
                                     ';
                                 }
                                 ?>
                             
-                    </div>
+                  
                     
                     </div>
                 </div>
@@ -134,13 +139,13 @@ session_start();
                                     },
                                     success:function(data) {
                                         $('#output').html(data);
-                           // $('#output').css('display', 'block');
+                          // $('#output').css('display', 'block');
 
                             $("#search").focusout(function() {
-                               // $('#output').css('display', 'none');
+                              // $('#output').css('display', 'none');
                             });
                             $("#search").focusin(function() {
-                              //  $('#output').css('display', 'block');
+                              //$('#output').css('display', 'block');
                                     });
                                 }
                                 });

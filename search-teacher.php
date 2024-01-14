@@ -18,8 +18,8 @@ if(isset($_POST['query'])) {
         <div class="mt-12 grid grid-rows-1 grid-flow-col justify-items-start ">
                                     <img width="65" height="65" class="rounded-full" src="'.$avatar.'" alt="">
                                     <div class="flex flex-col">
-                                    <h2 class="text-lg">'.$name.'</h2>
-                                    <span class="text-sm text-center">'.$subject.'</span>
+                                    <h2 class="text-lg text-focus">'.$name.'</h2>
+                                    <span class="text-sm text-center text-gray-500">'.$subject.'</span>
                                 </div>
                                 <a href="./profile_teacher-public.php?Id='.$id.'" class="text-p_color_forms underline">посмотреть профиль</a>
                                 </div>

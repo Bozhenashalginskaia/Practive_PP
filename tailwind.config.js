@@ -37,7 +37,10 @@ module.exports = {
         active_mes: "#DFD0F0",
         message: "#745998",
         error: "#C42D2D",
-        focus: "#3B1564"
+        focus: "#3B1564",
+        modal: "#946CD0",
+        modal_btn: "#AA84D6",
+        btn_active: "#B280EC"
       },
       fontSize: {
         '12px':'12px',

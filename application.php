@@ -1,19 +1,17 @@
 <?php
 session_start();
 require_once("db.php");
-$id_teacher = $_GET['Id'];
+$id_course = $_GET['Id'];
+$id_teacher = $_SESSION['courses']['id_teacher'];
 $user=$_SESSION['user']['id'];
 $accept = 0;
 
 
-$sql = "INSERT INTO requests (sender, taker, accept) VALUES ( ?, ?, ?) LIMIT 1";
+$sql = "INSERT INTO requests (sender, taker, accept, id_course) VALUES ( '$id_teacher', '$user', '$accept', '$id_course') LIMIT 1";
 $stmt = $pdo->prepare($sql);
-$stmt->bindParam(1, $id_teacher);
-$stmt->bindParam(2, $user);
-$stmt->bindParam(3, $accept);
 $execute = $stmt->execute();
 if ($execute) {
-    header("Location: ./");
+    header("Location: ./profile_teacher-private");
 }
 
 ?>

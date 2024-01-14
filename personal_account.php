@@ -1,10 +1,13 @@
 <?php
-
+include("db.php");
  $id_from = $_SESSION['user']['id'];
+ //$user =$_SESSION['teach']['id_to'];
+ //print_r($user);
   if(  $_SESSION['user']['role'] !== "student"){ 
     header("Location: ./profile_teacher-private.php"); }
-
+    
 ?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -62,7 +65,7 @@
                             <?= $_SESSION['user']['name']?>
                         </p>
                         
-                        <span class="-ml-2 text-sm text-gray-500">студент</span>
+                        <span class="mt-2 ml-3 text-sm mr-3 text-gray-500 ">студент</span>
                         </div>
                     </div>
 
@@ -73,15 +76,22 @@
                     <div class="">
                         <h1 class="text-xl text-h1_color font-bold text-center mt-20 ">Сообщения</h1>
                     </div>
-                       
-                            <!-- url вывод друзей, передача id-->
-                            <!-- register.php?msg=exists -->
-                            <a href=""></a>
-
+                  
                             <?php
 
                             include("db.php");
-
+                            
+                                 //pages
+                                 $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                                 $limit = 2;
+                                 $offset = ($page - 1) * $limit;
+                                 $stmt = $pdo->prepare("SELECT COUNT(*) FROM messages where from_id='$id_from'");
+                                 $stmt->execute();
+                                 $total_pages = $stmt->fetchColumn();
+                                 $total = round($total_pages / $limit, 0);
+                                 //print_r($total);
+                                 //pages
+                               
                             $query=$pdo->prepare("SELECT DISTINCT to_user FROM messages WHERE from_id='$id_from'");
                             $query->execute();
                             
@@ -90,91 +100,38 @@
                             foreach($data as $user){
                                 $to_id = $user['to_user'];
                             
-
-                            $sql= $pdo->prepare("SELECT * FROM users WHERE id='$to_id'");
-                            $sql->execute();
-
-                            $result=$sql->fetchAll(PDO::FETCH_ASSOC);
-
-                            if($result){
-                                foreach($result as $row){
-                                    $_SESSION['teach'] = [
-                                    "username" => $row["username"],
-                                    "id_to" => $row["id"],
-                                    ];
-
-                            // foreach($result as $row){
-                            //     $username = $row['username'];
-                            //     // $avatar = $row['avatar'];
-                            //     $id_to = $row['id'];
-
-                            echo ' <div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
-                            <a href="./message.php?Id='.$_SESSION['teach']['id_to'].'" class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
+                            
+                                $sql= $pdo->prepare("SELECT * FROM users WHERE id='$to_id' LIMIT $limit OFFSET $offset");
+                                $sql->execute();
+                              
+    
+                                $result=$sql->fetchAll(PDO::FETCH_ASSOC);
+    
+                                if($result){
+                                    foreach($result as $row){
+                                        $_SESSION["teach"] = [
+                                        "username" => $row["username"],
+                                        "id" => $row["id"],
+                                        "avatar" => $row["avatar"],
+                                        ];
+                            
+                            echo '<div class="w-45 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
+                            <a href="./message.php?Id='.$_SESSION['teach']['id'].'" 
+                            class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active
+                             hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
                             <div class="flex justify-around mt-2">
                             <p class="ml-3 text-sm text-BEACD2">'.$_SESSION['teach']['username'].'</p>
                         </div>
-                        <img class="ml-3 " src=<?=$avatar?>
-                    </a>
-                    </div>';
-                                }}
+                       
+                    </div>
+                    </a>';
+                       }
+                              }
                             }
-                        
-                        
+                            //пагинация
+                            include('pagination.php');
                             ?>
 
-
-                        
-                    
-
-                    <div class="flex justify-around mt-7">
-                        <nav aria-label="Page navigation example">
-                            <ul class="list-style-none flex">
-                              <li>
-                                <a
-                                  class="pointer-events-none relative block rounded-full bg-transparent px-3 py-1.5 text-sm text-D1408C transition-all duration-300 "
-                                  >Назад</a
-                                >
-                              </li>
-                              <li>
-                                <a
-                                  class="relative block rounded-full bg-transparent px-3 py-1.5 text-sm text-D1408C transition-all duration-300 hover:bg-active_mes"
-                                  href="#!"
-                                  >1</a
-                                >
-                              </li>
-                              <li aria-current="page">
-                                <a
-                                  class="relative block rounded-full bg-primary-100 px-3 py-1.5 text-sm font-medium text-primary-700 transition-all duration-300 text-BEACD2 focus:bg-active_mes"
-                                  href="#!"
-                                  >2
-                                  <span
-                                    class="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]"
-                                    >(current)</span
-                                  >
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  class="relative block rounded-full bg-transparent px-3 py-1.5 text-sm text-D1408C transition-all duration-300 hover:bg-active_mes"
-                                  href="#!"
-                                  >3</a
-                                >
-                              </li>
-                              <li>
-                                <a
-                                  class="relative block rounded-full bg-transparent px-3 py-1.5 text-sm text-D1408C transition-all duration-300 hover:bg-active_mes"
-                                  href="#!"
-                                  >Следующая</a
-                                >
-                              </li>
-                            </ul>
-                          </nav> 
-                    </div>
-
-                    <!-- <div class="flex justify-center items-center">
-                        
-                            <a href="student-edit.php?id=<?=$row['id']?>" class="mt-8 text-center text-D1408C underline">Редактировать</a>
-                          </div> -->
                 </div>
 
                 <!-- Message -->
@@ -185,66 +142,61 @@
                         <h1 class="text-2xl text-h1_color font-bold text-center mt-6">Мои занятия</h1>
                         <div class="">
                         <div class="mb-3 ml-11 mt-10 flex justify-center">
-                            <!-- <div class="relative mb-4 flex w-full flex-wrap">
-                              <input
-                                type="search"
-                                class="relative m-0 -mr-0.5 block min-w-0 flex-auto rounded-border_ret border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none "
-                                placeholder="Search"
-                                aria-label="Search"
-                                aria-describedby="button-addon1" />
-                           -->
-                              <!--Search button-->
-                              <!-- <button
-                                class="relative z-[2] ml-5 flex items-center rounded-border_ret bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
-                                type="button"
-                                id="button-addon1"
-                                data-te-ripple-init
-                                data-te-ripple-color="light">
-                               <img src="./img/clip.svg" alt="">
-                              </button>
-                            </div>
-                          </div>
-
-                        <div class="grid grid-rows-1  ml-8 mt-16"> -->
-
-                            <div class="overflow-auto h-full max-h-450 scroll-smooth focus:scroll-auto" >
+                            
+                            <div class="overflow-auto scrollbar scrollbar-corner-black h-full max-h-450 scroll-smooth focus:scroll-auto" >
                                 <!-- max height 350px -->
                                 
                             <?php
                             require_once("db.php");
 
-                            $sql= $pdo->prepare("SELECT * FROM courses_status inner join courses on(courses_status.id_course=courses.id_course) where id_student = '$id_from'");
+                            $sql= $pdo->prepare("SELECT * FROM courses_status inner join courses 
+                            on(courses_status.id_course=courses.id_course) where id_student = '$id_from'");
                             $sql->execute();
                             $data=$sql->fetchAll(PDO::FETCH_ASSOC);
+
                             foreach($data as $user){
-                                $_SESSION ["data_course"] = [
-                                    "name_course"=> $user["name"],
-                                    "count" => $user["count"],
-                                    "time" => $user["time"],
-                                    
-                                ]
+                              $_SESSION ["data_course"] = [
+                                  "name_course"=> $user["name"],
+                                  "count" => $user["count"],
+                                  "time" => $user["time"],
+                                  "id_teacher" => $user["id_teacher"],
+                                  
+                              ];
+
+                              $query =$pdo->prepare("SELECT * FROM courses_status inner join users on (courses_status.id_teacher=users.id)");
+                              $query->execute();
+                              $result=$query->fetchAll(PDO::FETCH_ASSOC);
+
+                              foreach($result as $row){
+                                $_SESSION["teacher_course"] = [
+                                  "username_teacher" => $row["username"],
+                                ];
+                           
+                                
                             ?>
                                     
                             <div class="mb-5 w-104 h-35 rounded-border_f bg-F4F4FE text-center flex">
                                 <img class="mt-3 ml-3" src="./img/books.svg" alt="">
                                 <div class="text-D1408C text-center">
                                     <p class="text-D1408C text-2xl text-center mt-6"><?=$_SESSION['data_course']['name_course']?></p>
-                                    <p class="text-D1408C text-sm text-center mt-3">Сидоров И.И</p>
+                                    <p class="text-D1408C text-sm text-center mt-3"><?=$_SESSION['teacher_course']['username_teacher']?></p>
                                     <div class="flex text-sm justify-around mt-2">
                                         <div class="mb-4">
-                                            <p>Пн</p>
+                                            <p>Время</p>
                                             <p><?=$_SESSION['data_course']['time']?></p>
                                         </div>
                                         
-                                        <div class="">
+                                        <!-- <div class="">
                                             <p>Ср</p>
                                             <p>12:30</p>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
                             <?php
                             }
+                          }
+                          
                             ?>
                         </div>
                             
@@ -259,6 +211,8 @@
             </div> 
         </div>
     </div>
-        
+        <script>
+  
+        </script>
     </body>
     </html>

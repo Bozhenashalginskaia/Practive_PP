@@ -12,7 +12,24 @@ $_SESSION["name"] = $name;
 
 $_SESSION["role"] = $role;
 
+if (strlen($login) < 4) {
+    echo "Логин должен содержать минимум 3 символа.";
+    exit();
+   }
+
+   if (strlen($password) < 6) {
+    $_SESSION['message'] = 'Пароль должен содержать минимум 6 символов.';
+    exit();
+   }
+   $passwordRegex = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/';
+   if (!preg_match($passwordRegex, $password)) {
+    $_SESSION['message'] = 'Неправильный формат пароля';
+    header('Location: ./registration.php');
+    exit();
+   }
 if ($password !== $repeatpassword) {
+    
+    
     $_SESSION['message'] = 'Пароли не совпадают';
     header('Location: ./registration.php');
     } else {
@@ -90,6 +107,7 @@ try {
         }
         }
     $_SESSION['message'] = "Вы успешно зарегистрировались";
+    header ("Location: ./authorization.php");
     }
     else{
         $_SESSION['message'] = "Не добавлено";

@@ -25,7 +25,7 @@ session_start();
             <div class="flex justify-center">
                 <div class="space-x-20 text-white mt-20 text-2xl">
                     <a class="hover:underline underline-offset-8 decoration-1.5" href="./index.php">Главная</a>
-                    <a class="hover:underline underline-offset-8 decoration-1.5" href="autorization.php">Личный
+                    <a class="hover:underline underline-offset-8 decoration-1.5" href="./">Личный
                         кабинет</a>
                     <a class="hover:underline underline-offset-8 decoration-1.5" href="./search.php">Поиск</a>
                 </div>

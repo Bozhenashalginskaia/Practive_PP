@@ -43,10 +43,10 @@ session_start();
                               unset($_SESSION['message']);
                             ?>
                         
-                            <input placeholder="ФИО" type="name" name="name" required class="
+                            <input placeholder="ФИО" type="name" name="name" id="name" required class="
                             text-white mt-7 rounded-input_forms placeholder-white focus:placeholder-place_color placeholder-text-3xl px-3 py-2 bg-input_forms border shadow-sm border-input_forms focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full  sm:text-sm focus:ring-1" />
                           
-                            <input placeholder="Логин"  type="text"  name="login" required class="
+                            <input placeholder="Логин"  id="login" type="text"  name="login" required minlength="5" class="
                             text-white mt-7 rounded-input_forms placeholder-white focus:placeholder-place_color text-3xl  px-3 py-2 bg-input_forms border shadow-sm border-input_forms focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full sm:text-sm focus:ring-1"/>
                             
                             <label for="upload-photo" class="
@@ -58,10 +58,10 @@ session_start();
                             <input type="file" hidden name="avatar" required id="upload-photo"/>
                             
                        
-                            <input placeholder="Пароль" type="password" name="password" required class="
+                            <input placeholder="Пароль" id="password" type="password" name="password" required minlength="6" class="
                             text-white mt-7 rounded-input_forms placeholder-white focus:placeholder-place_color text-3xl px-3 py-2 bg-input_forms border shadow-sm border-input_forms focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full sm:text-sm focus:ring-1"/>
                      
-                            <input placeholder="Пароль еще раз"  type="password" name="repeatpassword" required class="
+                            <input placeholder="Пароль еще раз" id="repeatpassword" type="password" name="repeatpassword" required class="
                             mt-7 rounded-input_forms placeholder-white focus:placeholder-place_color text-3xl px-3 py-2 bg-input_forms border shadow-sm border-input_forms focus:outline-none focus:border-input_forms focus:ring-input_forms block w-full sm:text-sm focus:ring-1"/>
                     
                           <div id="role" class="flex wrap items-center justify-center text-white gap-x-2 mt-6" required>
@@ -72,9 +72,9 @@ session_start();
                           
                           <div class="flex justify-center text-center mt-10">
                             <!-- Button -->
-                          <input type="submit"  name="submit" class="text-center  text-white px-6 
+                          <button type="submit"  name="submit" class="text-center  text-white px-6 
                           py-3 bg-btn_color  rounded-border w-27 text-xl" placeholder="Зарегистрироваться">
-                            <!-- Button -->
+                            <!-- Button -->Зарегистрироваться</button>
                         </div>
 
                         <div class="flex mt-6 mb-4 justify-center">
@@ -103,6 +103,6 @@ session_start();
               
               <div class="flex items-center justify-center">Сервис создан с помощью...</div>
               </footer> -->
-<!-- <script src="./js/validation.js"></script> -->
+<script src="./js/validation.js"></script>
             </body>
             </html>

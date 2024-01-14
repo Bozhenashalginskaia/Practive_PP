@@ -1,8 +1,11 @@
 <?php
 session_start();
 $from_id = $_SESSION['user']['id'];
-$users =$_SESSION['sms']['id'];
-//print_r($users);
+$sms_id = $_GET['Id'];
+$_SESSION['teacher_id_sms'] = $sms_id;
+print_r($sms_id);
+print_r($from_id);
+
 ?>
 
 <!DOCTYPE html>
@@ -50,25 +53,20 @@ $users =$_SESSION['sms']['id'];
         <!-- Blocks -->
               <div class="container mx-auto grid rounded-border_ret bg-white my-4">
                     <div class="bg-colors_left -ml-5.5rem rounded-border_ret row-start-1 
-                    col-span-2 ">
-                    <div class="flex ml-6 mt-6">
-                    <img src="<?= $_SESSION['user']['avatar'] ?>" width="65" height="65" class="rounded-full" alt="avatar">
-                        <div class="text-center">
-                        <p class="mt-2 ml-3 text-h1_color text-lg mr-3">
-                        <?= $_SESSION['user']['name']?>
-                        </p>
-                        <span class="-ml-2 text-sm text-gray-500">студент</span>
-                        </div>
-                    </div>
-
+                    col-span-2 w-180">
+                    
+                    <!-- <div class="flex ml-6 mt-6">
+                       avatar 
+                        <img src="<?= $_SESSION['user']['avatar'] ?>" width="65" height="65" class="rounded-full" alt="avatar">
+                        
+                    </div> -->
                  
                         <div class="grid grid-rows-3 px-3 mt-12 gap-y-5">
                             <?php
 
                             include("db.php");
 
-                           // $sql=$pdo->prepare("SELECT DISTINCT to_user FROM messages inner join users on(users.id = messages.to_user) WHERE from_id='$id_from'");
-                            $query=$pdo->prepare("SELECT DISTINCT to_user FROM messages WHERE from_id='$from_id'");
+                           $query=$pdo->prepare("SELECT DISTINCT to_user FROM messages WHERE from_id='$from_id'");
                             $query->execute();
                             
                             $data=$query->fetchAll(PDO::FETCH_ASSOC);
@@ -88,28 +86,13 @@ $users =$_SESSION['sms']['id'];
                                    "id" => $row["id"],
                               
                                 ];
-                            //     foreach($result as $row){
-                            //  $username = $row['username'];
-                            //     $avatar = $row['avatar'];
-                            //     $id = $row['id'];
-
-                                //$_SESSION['id'] = $id
-                           
-                            echo '<div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
-                            <div class="flex justify-around mt-2">
-                            <p class="ml-3 text-sm text-BEACD2">'.$_SESSION['sms']['username'].'</p>
-
-                           
-                        </div>
-                    </div>';
                                 }
                             }
                             
-                        
+                            
                             ?>
-                <!--  <img class="ml-3 rounded-full" width="20" height="20" src='.$_SESSION['sms']['avatar'].' -->
-
-            <div class="flex items-center justify-center mt-7 mb-3">
+                
+            <div class="grid items-center justify-center mt-7 mb-3">
                 <a href="./index.php"><img class="active:mr-3 hover:mr-2" src="./img/arrow_back.svg" alt=""></a>
             </div>
 
@@ -125,12 +108,13 @@ $users =$_SESSION['sms']['id'];
                         <div class="">
                         <div class="overflow-auto mt-4 flex justify-center items-center ml-8 py-2 rounded-border_ret bg-EAE0F5 text-white text-center">
                             <div class="flex justify-center mt-2">
-                            <p class="ml-3 text-xl text-message text-center"><?=$_SESSION['sms']['username']?></p>
+                                
+                            <p class="ml-3 text-xl text-message text-center"><?=$sms_id?></p>
                         </div>
                     </div>
                         </div>
                         <!-- Вывод сообщений -->
-                        <div class="mt-16 ml-6 messages-wrap overflow-y-auto h-2/4">
+                        <div class="mt-16 ml-6 messages-wrap  h-2/4">
                        
                         </div>
                          <!--Вывод сообщений -->
@@ -199,13 +183,16 @@ $users =$_SESSION['sms']['id'];
             });
 
             function renderMessage(item){
-               let params=(new URL(document.location)).searchParams;
-                let from_id=params.get("from_id");
+              
+                //let time = new Date(item.datetime * 1000);
+               // time = `${time.getHours()}`
+               
 
-
+            const from_id = "<?php echo $from_id; ?>";
+            const to_user = "<?php echo $sms_id; ?>";
+       
               if(item.from_id == from_id) {
-
-                    return `
+                return `
             <h1 class="px-8 mt-4 text-left text-gray-500 text-xs">${item.datetime}</h1>
         <div class="w-3/4 mt-1 ml-6 py-13 rounded-border_ret bg-F4F4FE text-left flex">
         <h1 class="px-8 py-4 text-left text-message text-sm">${item.message}</h1>
@@ -213,23 +200,24 @@ $users =$_SESSION['sms']['id'];
                 `;
            }
         else {
-           return `<div class="float-right w-3/4 mt-5 rounded-border_ret bg-F4F4FE text-right flex -mr-14">
+           return ` <h1 class=" mt-4 text-right text-gray-500 text-xs">${item.datetime}</h1>
+           <div class="float-right w-3/4 mt-5 rounded-border_ret bg-F4F4FE text-right flex -mr-14">
                 <h1 class="px-8 py-4 text-right text-message text-sm">${item.message}</h1>
                 </div>`;
-            
             
        }
     }
 
             // добавление сообщения в БД
     $('#chat-click').submit(function(e){
-        let params=(new URL(document.location)).searchParams;
-        let from_id=params.get("from_id");
+        // let params=(new URL(document.location)).searchParams;
+        const from_id = "<?php echo $from_id; ?>";
+        console.log(from_id)
         $.post("ajax.php?action=add_message", {
         //текст сообщения введенного в input
             message: $('#message_text').val(),
-            from_id: from_id
-            //айди пользователя 
+            from_id: from_id,
+            //айди пользователя какой именно айдишник ему нужен?
         }).done(function(data) {$('#message_text').val('')});
 
         return false;

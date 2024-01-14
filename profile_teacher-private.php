@@ -1,6 +1,7 @@
 <?php
 session_start();
 $id_t=$_SESSION['user']['id'];
+
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +86,7 @@ $id_t=$_SESSION['user']['id'];
 ?>
                         <img class="rounded-full" src="<?=$_SESSION['user']['avatar']?>" width="145" height="145" alt="">
                         <div class="text-center">
-                            <p class="mt-8 ml-3 text-h1_color text-lg mr-3">
+                            <p class="mt-8 ml-3 text-h1_color text-lg mr-3 break-words">
                             <?= $_SESSION['user']['name']?>
                             </p>
                         <span class="text-sm text-gray-500"><?=$_SESSION['teacher']['subject']?></span>
@@ -104,7 +105,6 @@ $id_t=$_SESSION['user']['id'];
                     <div class="">
                         <h1 class="text-xl text-h1_color font-bold text-center mt-12">Занятия</h1>
                     </div>
-                    
                     <?php
                     require_once("db.php");
                     $query=$pdo->prepare("SELECT * FROM courses inner join teacher_info on(teacher_info.id_teacher = courses.id_teach) where id_teach='$id_t'");
@@ -120,8 +120,9 @@ $id_t=$_SESSION['user']['id'];
                             "data" => $row["day"],
                             ];
                     ?>
+                    
                   <div class="grid grid-rows-1 px-3 mt-6 gap-y-5">
-                            <div class="w-60 h-15 rounded-border_ret bg-EAE0F5 text-white text-center">
+                            <div class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center">
                                 <div class="flex justify-around mt-2">
                                 <p class="ml-3 text-sm text-BEACD2 font-bold"><?=$_SESSION['courses']['name_courses']?></p>
                             </div>
@@ -140,14 +141,12 @@ $id_t=$_SESSION['user']['id'];
                     }
                     ?>
 
-                        <div class="flex justify-center items-center mb-5">
-                            <a href="./edit.php?id=<?=$_SESSION['user']['id']?>" class="mt-8 text-center text-D1408C underline">Редактировать</a>
-                          </div>
-
+                      
                           <div class="flex justify-center items-center mb-5">
-                            <a href="./add-course.php?id=<?=$_SESSION['user']['id']?>" class="mt-8 text-center text-D1408C underline">Добавить занятия</a>
+                            <a href="./add-course.php?id=<?=$_SESSION['user']['id']?>" class="mt-4 text-center  text-white px-6 
+                          py-2 bg-btn_color  rounded-border w-20 text-12px">Добавить занятие</a>
                           </div>
-
+                         
                           <div class="">
                         <h1 class="text-xl text-h1_color font-bold text-center mt-12">Заявки</h1>
                     </div>
@@ -223,9 +222,71 @@ $id_t=$_SESSION['user']['id'];
                                                 <h1 class="text-2xl text-h1_color font-bold text-center mt-16">Компетенции</h1>
                                                 <p class="text-h1_color mt-6 text-base text-center"><?=$_SESSION['teacher']['skills']?></p>
                                                         </div>
+
+                                                        <?php
+
+include("db.php");
+
+     //pages
+     $page = isset($_GET['page']) ? $_GET['page'] : 1;
+     $limit = 2;
+     $offset = ($page - 1) * $limit;
+     $stmt = $pdo->prepare("SELECT COUNT(*) FROM messages where from_id='$id_t'");
+     $stmt->execute();
+     $total_pages = $stmt->fetchColumn();
+     $total = round($total_pages / $limit, 0);
+     //print_r($total);
+     //pages
+   
+$query=$pdo->prepare("SELECT DISTINCT to_user FROM messages WHERE from_id='$id_t'");
+$query->execute();
+
+$data=$query->fetchAll(PDO::FETCH_ASSOC);
+
+foreach($data as $user){
+    $to_id = $user['to_user'];
+
+
+    $sql= $pdo->prepare("SELECT * FROM users WHERE id='$to_id' LIMIT $limit OFFSET $offset");
+    $sql->execute();
+  
+
+    $result=$sql->fetchAll(PDO::FETCH_ASSOC);
+
+    if($result){
+        foreach($result as $row){
+            $_SESSION["teach"] = [
+            "username" => $row["username"],
+            "id" => $row["id"],
+            "avatar" => $row["avatar"],
+            ];
+
+echo '<div class="w-45 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
+<a href="./message.php?Id='.$_SESSION['teach']['id'].'" 
+class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active
+ hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
+<div class="flex justify-around mt-2">
+<p class="ml-3 text-sm text-BEACD2">'.$_SESSION['teach']['username'].'</p>
+</div>
+
+</div>
+</a>';
+}
+  }
+}
+//пагинация
+include('pagination.php');
+?>
+
+
+                                                        <div class="flex justify-center items-center mb-5">
+                            <a href="./edit.php?id=<?=$_SESSION['user']['id']?>" class="mt-8 text-center text-D1408C underline">Редактировать</a>
+                          </div>
+
+
                             </div>
 
-                         
+     
                             
                         </div>
                     </div>
