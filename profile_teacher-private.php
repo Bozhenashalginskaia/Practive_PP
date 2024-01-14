@@ -17,35 +17,32 @@ $id_t=$_SESSION['user']['id'];
 
 
 <body class="bg-gradient-to-r from-grad_one from-0% to-grad_two to-94.79% font-Inter">
-     
+
+     <!-- Color -->
+    <div class="container mx-auto pr-4 bg-gradient-to-r from-grad_one_rectangle from-0.8% to-grad_two_rectangle to-97.53% rounded-border_ret mb-5 ">
         <!-- Color -->
-        
-        <div class="container mx-auto pr-4 bg-gradient-to-r from-grad_one_rectangle from-0.8% to-grad_two_rectangle to-97.53% rounded-border_ret mb-5">
-        <!-- Color -->
 
 
 
-        <div class="flex mt-20">
+        <div class="flex mt-16">
     <!-- Start left Navbar -->
     <header class="mr-12">
         <div class="flex flex-col">
-            <div class="flex items-right  mb-25 -ml-4">
+            <div class="flex items-right mb-25 -ml-4">
                 <img class="mt-12" src="./img/logo_2.svg" alt="">
             </div>
 
-            <div class="flex flex-col space-y-44 text-white mt-14 text-2xl mb-14">
-                <div class="flex flex-col space-y-14 text-white mt-20 text-2xl">
+            <div class="flex flex-col space-y-44 text-white mt-8 text-2xl mb-8">
+                <div class="flex flex-col space-y-14 text-white mt-12 text-2xl">
                 <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Главная</a>
                 <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Личный кабинет</a>
                 <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./search.php">Поиск</a>
- 
-            </div>
-            <a class="text-navbar hover:underline
-                 underline-offset-8 decoration-1.5 
-                 hover:text-white" href="./exit.php">Выход</a> </div>
-            
-            </div>
-        </header>
+                </div>
+                    <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./exit.php">Выход</a>
+                </div>
+                
+                </div>
+    </header>
         <!-- End left Navbar -->
 
         <!-- <div class="container mx-auto bg-gradient-to-r from-colors_left from-10% to-white to-90% rounded-border_ret my-4">

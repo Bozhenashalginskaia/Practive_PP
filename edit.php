@@ -24,14 +24,7 @@
                 <img class="mt-12" src="./img/logo_2.svg" alt="">
             </div>
 
-            <div class="flex flex-col space-y-44 text-white mt-14 text-2xl mb-14">
-                <div class="flex flex-col space-y-14 text-white mt-20 text-2xl">
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Главная</a>
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Личный кабинет</a>
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./search.php">Поиск</a>
- 
-                
-                </div>
+        
             </header>
             <!-- End left Navbar -->
             <div class="container bg-white rounded-border_ret my-4 ">

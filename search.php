@@ -22,7 +22,7 @@ session_start();
 
 
 
-        <div class="flex mt-20">
+        <div class="flex mt-16">
     <!-- Start left Navbar -->
     <header class="mr-12">
         <div class="flex flex-col">
@@ -30,12 +30,11 @@ session_start();
                 <img class="mt-12" src="./img/logo_2.svg" alt="">
             </div>
 
-            <div class="flex flex-col space-y-44 text-white mt-14 text-2xl mb-14">
-                <div class="flex flex-col space-y-14 text-white mt-20 text-2xl">
+            <div class="flex flex-col space-y-44 text-white mt-8 text-2xl mb-10">
+                <div class="flex flex-col space-y-14 text-white mt-12 text-2xl">
                 <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Главная</a>
                 <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Личный кабинет</a>
                 <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./search.php">Поиск</a>
- 
                 </div>
                     <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./exit.php">Выход</a>
                 </div>

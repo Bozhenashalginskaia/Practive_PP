@@ -16,17 +16,15 @@ $id_user=$_SESSION['user']['id'];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.14/dist/tailwind.min.css" />
 </head>
 
-
 <body class="bg-gradient-to-r from-grad_one from-0% to-grad_two to-94.79% font-Inter">
-     
+
+     <!-- Color -->
+    <div class="container mx-auto pr-4 bg-gradient-to-r from-grad_one_rectangle from-0.8% to-grad_two_rectangle to-97.53% rounded-border_ret mb-5 ">
         <!-- Color -->
-        
-        <div class="container mx-auto pr-4 bg-gradient-to-r from-grad_one_rectangle from-0.8% to-grad_two_rectangle to-97.53% rounded-border_ret mb-5">
-        <!-- Color -->
 
 
 
-        <div class="flex mt-8">
+        <div class="flex mt-16">
     <!-- Start left Navbar -->
     <header class="mr-12">
         <div class="flex flex-col">
@@ -34,18 +32,16 @@ $id_user=$_SESSION['user']['id'];
                 <img class="mt-12" src="./img/logo_2.svg" alt="">
             </div>
 
-            <div class="flex flex-col space-y-44 text-white mt-14 text-2xl mb-14">
-                <div class="flex flex-col space-y-14 text-white mt-20 text-2xl">
+            <div class="flex flex-col space-y-44 text-white mt-8 text-2xl mb-10">
+                <div class="flex flex-col space-y-14 text-white mt-12 text-2xl">
                 <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Главная</a>
                 <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Личный кабинет</a>
                 <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./search.php">Поиск</a>
- 
-            </div>
-            <a class="text-navbar hover:underline
-                 underline-offset-8 decoration-1.5 
-                 hover:text-white" href="./exit.php">Выход</a> </div>
-            
-            </div>
+                </div>
+                    <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./exit.php">Выход</a>
+                </div>
+                
+                </div>
         </header>
         <!-- End left Navbar -->
 

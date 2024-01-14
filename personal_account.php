@@ -27,7 +27,7 @@ include("db.php");
 
 
 
-        <div class="flex mt-20">
+        <div class="flex mt-5">
     <!-- Start left Navbar -->
     <header class="mr-12">
         <div class="flex flex-col">
