@@ -143,7 +143,9 @@ include("db.php");
                         <div class="">
                         <div class="mb-3 ml-11 mt-10 flex justify-center">
                             
-                            <div class="overflow-auto scrollbar scrollbar-corner-black h-full max-h-450 scroll-smooth focus:scroll-auto" >
+                            <div class="
+                            scrollbar-thin scrollbar-track-purple-200 scrollbar-thumb-dark-purple-400 scrollbar-hover-black
+                            overflow-auto scrollbar scrollbar-corner-black h-full max-h-450 scroll-smooth focus:scroll-auto" >
                                 <!-- max height 350px -->
                                 
                             <?php

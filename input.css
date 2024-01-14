@@ -4,3 +4,23 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.scrollbar-thin::-webkit-scrollbar {
+  @apply w-2 h-2
+}
+
+
+.scrollbar-track-purple-200::-webkit-scrollbar-track {
+  @apply bg-active_mes
+}
+
+ 
+.scrollbar-thumb-dark-purple-400::-webkit-scrollbar-thumb {
+  @apply bg-active rounded-full border-2 border-active
+
+}
+
+
+.scrollbar-hover-black::-webkit-scrollbar-thumb:hover {
+  @apply bg-black
+}

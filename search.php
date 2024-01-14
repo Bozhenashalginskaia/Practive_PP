@@ -82,7 +82,10 @@ session_start();
                         <h1 class="text-2xl text-h1_color font-bold text-center mt-12">Репетиторы</h1>
                     </div>
                     <div id="output">
-                    <div class="overflow-auto h-full max-h-450 scroll-smooth focus:scroll-auto">
+                    <div class="mb-3
+                            scrollbar-thin scrollbar-track-purple-200 scrollbar-thumb-dark-purple-400 scrollbar-hover-black
+                            overflow-auto scrollbar scrollbar-corner-black h-full max-h-450 scroll-smooth focus:scroll-auto" >
+                                
                     
                                 
                                 <?php

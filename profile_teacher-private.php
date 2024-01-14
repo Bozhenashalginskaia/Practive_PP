@@ -45,17 +45,9 @@ $id_t=$_SESSION['user']['id'];
     </header>
         <!-- End left Navbar -->
 
-        <!-- <div class="container mx-auto bg-gradient-to-r from-colors_left from-10% to-white to-90% rounded-border_ret my-4">
-            <div class="flex flex-1">
-                <p class="pr-6">Text</p>
-                <div
-                  class="inline-block h-[250px] min-h-[1em] w-0.5 self-stretch bg-black opacity-100 dark:opacity-50"></div>
-                <p class="pl-6">Text</p>
-              </div> -->
-
               <div class="container mx-auto grid rounded-border_ret bg-white my-4">
                     <div class="bg-colors_left -ml-5.5rem rounded-border_ret row-start-1 
-                    col-span-3">
+                    col-span-1">
                     <div class="flex flex-col">
                     <div class="flex ml-6 mt-6">
                     <?php
@@ -140,8 +132,8 @@ $id_t=$_SESSION['user']['id'];
 
                       
                           <div class="flex justify-center items-center mb-5">
-                            <a href="./add-course.php?id=<?=$_SESSION['user']['id']?>" class="mt-4 text-center  text-white px-6 
-                          py-2 bg-btn_color  rounded-border w-20 text-12px">Добавить занятие</a>
+                            <a href="./add-course.php?id=<?=$_SESSION['user']['id']?>" class="mt-4 text-center  text-white px-8 
+                          py-4 bg-btn_color  rounded-border w-20 text-12px">Добавить занятие</a>
                           </div>
                          
                           <div class="">
@@ -202,7 +194,7 @@ $id_t=$_SESSION['user']['id'];
                 </div>
 
                 
-                    <div class="bg-white rounded-border_ret row-start-1 col-span-1 ml-14">
+                    <div class="bg-white rounded-border_ret row-start-1 col-span-2 ml-14">
                     
 
                     <div class="">

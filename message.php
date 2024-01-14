@@ -3,8 +3,8 @@ session_start();
 $from_id = $_SESSION['user']['id'];
 $sms_id = $_GET['Id'];
 $_SESSION['teacher_id_sms'] = $sms_id;
-print_r($sms_id);
-print_r($from_id);
+// print_r($sms_id);
+// print_r($from_id);
 
 ?>
 
@@ -22,13 +22,12 @@ print_r($from_id);
 
 <body class="bg-gradient-to-r from-grad_one from-0% to-grad_two to-94.79% font-Inter">
 
-     
     <div class="container mx-auto pr-4 bg-gradient-to-r from-grad_one_rectangle from-0.8% to-grad_two_rectangle to-97.53% rounded-border_ret mb-5">
         <!-- Color -->
 
 
 
-        <div class="flex mt-20">
+        <div class="flex mt-5">
     <!-- Start left Navbar -->
     <header class="mr-12">
         <div class="flex flex-col">
@@ -41,9 +40,13 @@ print_r($from_id);
                 <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Главная</a>
                 <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./index.php">Личный кабинет</a>
                 <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./search.php">Поиск</a>
-
+ 
             </div>
-                <a class="text-navbar hover:underline underline-offset-8 decoration-1.5 hover:text-white" href="./exit.php">Выход</a>
+          
+                <a class="text-navbar hover:underline
+                 underline-offset-8 decoration-1.5 
+                 hover:text-white" href="./exit.php">Выход</a>
+                
             </div>
 
             </div>
