@@ -53,9 +53,7 @@ if ($password !== $repeatpassword) {
     }
 
 try {
-
     
-
     $statement = $pdo->prepare("SELECT * FROM users WHERE login=:login LIMIT 1");
     $statement->bindParam(':login', $login, PDO::PARAM_STR);
     $statement->execute();

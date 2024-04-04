@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +17,6 @@
      <!-- Color -->
     <div class="container mx-auto pr-4 bg-gradient-to-r from-grad_one_rectangle from-0.8% to-grad_two_rectangle to-97.53% rounded-border_ret mb-5 ">
         <!-- Color -->
-
-
 
         <div class="flex mt-20">
     <!-- Start left Navbar -->
@@ -40,6 +42,14 @@
                     <h1 class="text-2xl text-h1_color font-bold text-center mt-12">Редактирование</h1>
                 </div>
           
+                <?php
+                          if ($_SESSION['message'] = "Заполните поля")
+                              echo '<p class="text-center text-h1_color font-bold mt-2 rounded-input_forms
+                               px-3 py-2 border-white border"> ' . $_SESSION['message'] . ' </p>';
+                             
+                             
+                            ?>
+                
                          <form action="./info_teacher.php" method="POST">
                           
                          <div class="grid">

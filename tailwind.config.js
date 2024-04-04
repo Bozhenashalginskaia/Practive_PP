@@ -4,6 +4,7 @@ module.exports = {
  darkMode: 'class',
   theme: {
     extend: {
+      
       fontFamily: {
         Inter: ['Inter'],
         Biz: ['BIZ UDGothic']
@@ -29,6 +30,7 @@ module.exports = {
         EAE0F5: '#EAE0F5',
         D1408C: '#61408C',
         BEACD2: '#BEACD2',
+        B9b8cab: '#9b8cab',
         p_cl: '#725697',
         text_color: '#765992',
         footer_color: '#362388',
@@ -40,7 +42,8 @@ module.exports = {
         focus: "#3B1564",
         modal: "#946CD0",
         modal_btn: "#AA84D6",
-        btn_active: "#B280EC"
+        btn_active: "#B280EC",
+        m745998: "#745998"
       },
       fontSize: {
         '12px':'12px',

@@ -61,7 +61,7 @@ include("db.php");
                        <!-- avatar -->
                         <img src="<?= $_SESSION['user']['avatar'] ?>" width="65" height="65" class="rounded-full" alt="avatar">
                         <div class="text-center">
-                        <p class="mt-2 ml-3 text-h1_color text-lg mr-3">
+                        <p class="mt-2 ml-3 text-h1_color text-lg mr-3 break-words">
                             <?= $_SESSION['user']['name']?>
                         </p>
                         
@@ -76,7 +76,7 @@ include("db.php");
                     <div class="">
                         <h1 class="text-xl text-h1_color font-bold text-center mt-20 ">Сообщения</h1>
                     </div>
-                  
+                    <div class="grid grid-rows-1 px-3 mt-12 gap-y-5">
                             <?php
 
                             include("db.php");
@@ -115,13 +115,11 @@ include("db.php");
                                         "avatar" => $row["avatar"],
                                         ];
                             
-                            echo '<div class="w-45 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
-                            <a href="./message.php?Id='.$_SESSION['teach']['id'].'" 
-                            class="w-85 h-15 rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active
-                             hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
-                            <div class="flex justify-around mt-2">
-                            <p class="ml-3 text-sm text-BEACD2">'.$_SESSION['teach']['username'].'</p>
-                        </div>
+                                        echo '<a href="./message.php?Id='.$_SESSION['teach']['id'].'" >
+                                        <div class="rounded-border_ret bg-EAE0F5 text-white text-center hover:text-active hover:bg-active_mes active:bg-active_mes focus:outline-none focus:bg-active_mes hover:font-bold ">
+                            
+                            <p class="text-sm px-3 py-3 text-BEACD2 ">'.$_SESSION['teach']['username'].'</p>
+                        
                        
                     </div>
                     </a>';
@@ -133,6 +131,7 @@ include("db.php");
                             ?>
 
                 </div>
+                    </div>
 
                 <!-- Message -->
                 
@@ -156,6 +155,10 @@ include("db.php");
                             $sql->execute();
                             $data=$sql->fetchAll(PDO::FETCH_ASSOC);
 
+                            $query =$pdo->prepare("SELECT * FROM courses_status inner join users on (courses_status.id_teacher=users.id) limit 1");
+                              $query->execute();
+                              $result=$query->fetchAll(PDO::FETCH_ASSOC);
+
                             foreach($data as $user){
                               $_SESSION ["data_course"] = [
                                   "name_course"=> $user["name"],
@@ -164,40 +167,38 @@ include("db.php");
                                   "id_teacher" => $user["id_teacher"],
                                   
                               ];
-
-                              $query =$pdo->prepare("SELECT * FROM courses_status inner join users on (courses_status.id_teacher=users.id)");
-                              $query->execute();
-                              $result=$query->fetchAll(PDO::FETCH_ASSOC);
+                              
 
                               foreach($result as $row){
                                 $_SESSION["teacher_course"] = [
                                   "username_teacher" => $row["username"],
                                 ];
                            
+                             
                                 
                             ?>
                                     
-                            <div class="mb-5 w-104 h-35 rounded-border_f bg-F4F4FE text-center flex">
-                                <img class="mt-3 ml-3" src="./img/books.svg" alt="">
+                            <div class="px-10 mb-5 w-104 h-35 rounded-input_forms bg-F4F4FE text-center flex">
+                                <img class="mt-3 " src="./img/books.svg" alt="">
                                 <div class="text-D1408C text-center">
                                     <p class="text-D1408C text-2xl text-center mt-6"><?=$_SESSION['data_course']['name_course']?></p>
+                        
                                     <p class="text-D1408C text-sm text-center mt-3"><?=$_SESSION['teacher_course']['username_teacher']?></p>
+                                   
                                     <div class="flex text-sm justify-around mt-2">
                                         <div class="mb-4">
                                             <p>Время</p>
                                             <p><?=$_SESSION['data_course']['time']?></p>
                                         </div>
-                                        
-                                        <!-- <div class="">
-                                            <p>Ср</p>
-                                            <p>12:30</p>
-                                        </div> -->
+                                    
                                     </div>
                                 </div>
                             </div>
                             <?php
                             }
-                          }
+                        }
+                    
+                          
                           
                             ?>
                         </div>

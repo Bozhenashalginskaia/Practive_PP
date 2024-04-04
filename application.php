@@ -7,11 +7,11 @@ $user=$_SESSION['user']['id'];
 $accept = 0;
 
 
-$sql = "INSERT INTO requests (sender, taker, accept, id_course) VALUES ( '$id_teacher', '$user', '$accept', '$id_course') LIMIT 1";
+$sql = "INSERT INTO requests (id, sender, taker, accept, id_course) VALUES ( NULL, '$id_teacher', '$user', '$accept', '$id_course')";
 $stmt = $pdo->prepare($sql);
 $execute = $stmt->execute();
 if ($execute) {
-    header("Location: ./profile_teacher-private");
+    header("Location: ./profile_teacher-public.php");
 }
 
 ?>

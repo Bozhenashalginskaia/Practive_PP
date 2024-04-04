@@ -22,7 +22,7 @@ session_start();
 
 
 
-        <div class="flex mt-16">
+        <div class="flex mt-10">
     <!-- Start left Navbar -->
     <header class="mr-12">
         <div class="flex flex-col">

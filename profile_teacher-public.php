@@ -137,7 +137,7 @@ $id_user=$_SESSION['user']['id'];
 
 
                             
-                            <a id="openModal" href="./application.php?Id=<?=$_SESSION['courses']['id_course']?>" class="w-6 h-6 bg-BEACD2 rounded-xl float-right -mt-12 mr-4"></a>
+                            <a id="openModal" href="./application.php?Id=<?=$_SESSION['courses']['id_course']?>" class="w-6 h-6 bg-BEACD2 rounded-xl float-right -mt-16 mr-8 hover:bg-purple-500 focus:bg-purple-900"></a>
                             
                
                         
@@ -199,33 +199,26 @@ $id_user=$_SESSION['user']['id'];
                 
                                                        
                                                         <div class="flex justify-center text-center mt-10">
-                                                        <button type="submit" name="submit" class="text-center  text-white px-6 
-                          py-3 bg-btn_color  rounded-border w-27 text-sm" placeholder="Зарегистрироваться">Написать репетитору</button>
-                                                        </div>
+                                                        <?php
+
+include("db.php");
+
+                    // $query = $pdo->prepare("SELECT * FROM teacher_info ");
+    
+
+echo '  <button type="submit" name="submit" class="text-center  text-white px-6 
+py-3 bg-btn_color  rounded-border w-27 text-sm">
+<a href="./message.php?Id='.$_SESSION['courses']['id_teacher'].'" >Написать репетитору
+</a></button>
+                     ';
+
+?>
+                                                             </div>
                                                         <div class="flex justify-center text-center mt-10">
                                                         <a class="text-center text-p_color_forms underline" href="./search.php">Вернуться к поиску</a>
                                                         </div>
                             </div>
-<!-- 
-                         
-                            <a  class=" text-black font-bold py-2 px-4 rounded">
-    Open Modal
-</a>
-
-  <div  class="fixed top-0 left-0 w-full h-full flex items-center justify-center hidden">
-    <div class="modal-dialog bg-white rounded shadow-lg w-1/3">
-      <div class="modal-content p-4">
-        <h2 class="text-xl font-bold">Modal Title</h2>
-        <p>This is a simple modal using Tailwind CSS and JavaScript.</p>
-        <a  class="bg-gray-500 hover:bg-gray-700 text-black font-bold py-2 px-4 rounded mt-4">
-          Close
-</a>
-      </div>
-    </div>
-  </div>  -->
-
-
-                        
+        
                         </div>
 
                     </div>

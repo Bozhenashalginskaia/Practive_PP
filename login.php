@@ -40,14 +40,4 @@ catch(PDOException $e){
     echo $e->getMessage();
 }
 
- 
-// if($sql_execute) {
-//         header('Location: ./personal_account.php');
-//         exit(0);  
-// } else {
-//     $_SESSION['message'] = "No autorization";
-//             header('Location: ./autorization.php');
-//             exit(0);
-// }
-
 ?>

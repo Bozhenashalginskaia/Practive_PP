@@ -9,9 +9,9 @@ $from_id = $_SESSION['user']['id'];
  if(!isset($_GET['action'])) {
 
 
-    $start = ($_GET['start']) ? $_GET['start'] :  0;
-    $sql = ("SELECT * FROM messages INNER JOIN users on (messages.to_user=users.id) WHERE id_message > '$start' and ( to_user='$to_user' and from_id='$from_id') 
-    or ( from_id='$to_user' and to_user='$from_id')"); 
+    $start = ($_GET['start']) ? $_GET['start'] : 0;
+    $sql = ("SELECT * FROM messages INNER JOIN users on (messages.to_user=users.id) WHERE id_message > '$start' and ((to_user='$to_user' and from_id='$from_id') 
+    or (from_id='$to_user' and to_user='$from_id'))"); 
     
  try {
      
